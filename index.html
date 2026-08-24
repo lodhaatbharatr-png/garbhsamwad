@@ -1,167 +1,1497 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="mr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0d0d12">
-<title>३० दिवसांचा दैनिक गर्भसंवाद</title>
-<style>
-:root{
-  --bg:#0d0d12; --card:#17171e; --ink:#f4eee9; --muted:#aaa1a0;
-  --accent:#d7a0bd; --line:#2b2932; --button:#22212a;
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink)}
-body{
-  font-family:"Noto Sans Devanagari","Nirmala UI","Mangal",sans-serif;
-  display:flex;flex-direction:column;align-items:center;
-}
-main{width:min(720px,94vw);padding:20px 0 18px}
-.card-wrap{width:100%;}
-.card{
-  width:100%; min-height:48vh; max-height:68vh; overflow:auto;
-  background:linear-gradient(145deg,#191820,#14141a);
-  border:1px solid var(--line); border-radius:24px;
-  padding:27px 28px 24px;
-  box-shadow:0 18px 50px #00000055;
-  display:flex; flex-direction:column; justify-content:space-between;
-  -webkit-overflow-scrolling:touch;
-}
-.day{
-  color:var(--accent);font-size:.86rem;font-weight:800;
-  letter-spacing:.05em;margin-bottom:9px;
-}
-.title{
-  color:#fff7f2;font-size:clamp(1.45rem,4vw,2.15rem);
-  line-height:1.3;font-weight:900;margin:0 0 17px;
-}
-.content{
-  color:#ded7d3;font-size:clamp(1rem,2.5vw,1.16rem);
-  line-height:1.9;
-}
-.mantra{
-  text-align:center;color:#e6b4c9;font-size:1rem;font-weight:800;
-  margin-top:24px;padding-top:17px;border-top:1px solid #2c2931;
-  letter-spacing:.02em;
-}
-.nav{
-  display:flex;align-items:center;justify-content:center;
-  gap:14px;margin:14px 0 0;
-}
-button{
-  border:1px solid var(--line);background:var(--button);color:var(--ink);
-  border-radius:999px;padding:10px 20px;cursor:pointer;
-  font:inherit;box-shadow:0 5px 18px #00000030;
-}
-button.primary{background:#8d5573;border-color:#8d5573;color:#fff}
-button:disabled{opacity:.3;cursor:not-allowed}
-.progress{min-width:70px;text-align:center;color:var(--muted);font-size:.84rem}
-@media(max-width:600px){
-  main{width:94vw;padding-top:13px}
-  .card{min-height:50vh;max-height:64vh;border-radius:21px;padding:23px 20px 20px}
-  .content{line-height:1.82}
-  .nav{gap:8px}
-  button{padding:9px 15px}
-  .mantra{font-size:.92rem}
-}
-</style>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#0b0a0f">
+
+  <meta
+    name="description"
+    content="३० दिवसांचा दैनिक गर्भसंवाद"
+  >
+
+  <title>३० दिवसांचा दैनिक गर्भसंवाद</title>
+
+  <!-- Marathi-friendly font -->
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- React -->
+  <script
+    crossorigin
+    src="https://unpkg.com/react@18/umd/react.development.js">
+  </script>
+
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.development.js">
+  </script>
+
+  <!-- Lucide -->
+  <script
+    src="https://unpkg.com/lucide@latest">
+  </script>
+
+
+  <style>
+
+    :root {
+      --bg: #0b0a0f;
+      --bg-soft: #111017;
+
+      --card: rgba(27, 24, 34, 0.94);
+      --card-border: rgba(255, 255, 255, 0.09);
+
+      --text: #fff9f5;
+      --content: #e5dedb;
+      --muted: #aaa2a6;
+
+      --accent: #e3a8c4;
+      --accent-soft: #c984a9;
+
+      --primary: #9c5e7e;
+      --primary-dark: #7e4865;
+
+      --line: rgba(255,255,255,0.09);
+
+      --shadow:
+        0 30px 80px rgba(0,0,0,0.48);
+
+      --radius: 28px;
+    }
+
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    html {
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+    }
+
+
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100dvh;
+
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(190, 105, 145, 0.17),
+          transparent 42%
+        ),
+        radial-gradient(
+          circle at 100% 80%,
+          rgba(110, 75, 110, 0.10),
+          transparent 35%
+        ),
+        var(--bg);
+
+      color: var(--text);
+
+      font-family:
+        "Noto Sans Devanagari",
+        "Nirmala UI",
+        "Mangal",
+        system-ui,
+        sans-serif;
+
+      overflow-x: hidden;
+    }
+
+
+    button {
+      font-family: inherit;
+    }
+
+
+    /* =========================================
+       APP
+    ========================================= */
+
+    .app {
+      min-height: 100dvh;
+
+      display: flex;
+      justify-content: center;
+
+      padding:
+        max(18px, env(safe-area-inset-top))
+        14px
+        max(18px, env(safe-area-inset-bottom));
+
+      position: relative;
+    }
+
+
+    .shell {
+      width: min(720px, 100%);
+
+      min-height:
+        calc(
+          100dvh -
+          max(18px, env(safe-area-inset-top)) -
+          max(18px, env(safe-area-inset-bottom))
+        );
+
+      display: flex;
+      flex-direction: column;
+
+      justify-content: center;
+
+      gap: 14px;
+    }
+
+
+    /* =========================================
+       TOP HEADER
+    ========================================= */
+
+    .topbar {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      padding:
+        2px 5px 0;
+    }
+
+
+    .brand {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+    }
+
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(227,168,196,0.25),
+          rgba(156,94,126,0.13)
+        );
+
+      border:
+        1px solid rgba(227,168,196,0.18);
+
+      color: var(--accent);
+    }
+
+
+    .brand-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+
+      gap: 1px;
+    }
+
+
+    .brand-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+
+      color: #fff8f4;
+    }
+
+
+    .brand-subtitle {
+      font-size: 0.66rem;
+
+      color: var(--muted);
+
+      letter-spacing: 0.02em;
+    }
+
+
+    .counter {
+      color: var(--muted);
+
+      font-size: 0.78rem;
+      font-weight: 700;
+
+      padding:
+        7px 11px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,0.035);
+    }
+
+
+    /* =========================================
+       PROGRESS
+    ========================================= */
+
+    .progress-track {
+      width: 100%;
+      height: 4px;
+
+      border-radius: 99px;
+
+      background:
+        rgba(255,255,255,0.07);
+
+      overflow: hidden;
+    }
+
+
+    .progress-fill {
+      height: 100%;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--primary-dark),
+          var(--accent)
+        );
+
+      transition:
+        width 350ms ease;
+    }
+
+
+    /* =========================================
+       MAIN CARD
+    ========================================= */
+
+    .card {
+      width: 100%;
+
+      min-height: min(610px, 68dvh);
+      max-height: 72dvh;
+
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+
+      overflow: hidden;
+
+      border-radius: var(--radius);
+
+      border:
+        1px solid var(--card-border);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(32,29,39,0.97),
+          rgba(20,18,25,0.97)
+        );
+
+      box-shadow:
+        var(--shadow);
+
+      touch-action: pan-y;
+
+      outline: none;
+    }
+
+
+    /* Decorative glow */
+
+    .card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 230px;
+      height: 230px;
+
+      top: -150px;
+      right: -80px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(211,142,176,0.11);
+
+      filter: blur(25px);
+
+      pointer-events: none;
+    }
+
+
+    .card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      bottom: -140px;
+      left: -80px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(117,87,127,0.10);
+
+      filter: blur(25px);
+
+      pointer-events: none;
+    }
+
+
+    .card-inner {
+      position: relative;
+      z-index: 2;
+
+      height: 100%;
+
+      padding:
+        28px 25px 22px;
+
+      display: flex;
+      flex-direction: column;
+
+      overflow-y: auto;
+
+      -webkit-overflow-scrolling: touch;
+
+      scrollbar-width: none;
+    }
+
+
+    .card-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+
+    /* =========================================
+       DAY LABEL
+    ========================================= */
+
+    .day-row {
+      display: flex;
+      align-items: center;
+
+      gap: 9px;
+
+      margin-bottom: 12px;
+    }
+
+
+    .day-dot {
+      width: 8px;
+      height: 8px;
+
+      flex: 0 0 auto;
+
+      border-radius: 50%;
+
+      background: var(--accent);
+
+      box-shadow:
+        0 0 15px rgba(227,168,196,0.55);
+    }
+
+
+    .day {
+      color: var(--accent);
+
+      font-size: 0.78rem;
+
+      font-weight: 800;
+
+      letter-spacing: 0.06em;
+    }
+
+
+    /* =========================================
+       TITLE
+    ========================================= */
+
+    .title {
+      color: var(--text);
+
+      font-size:
+        clamp(1.65rem, 7vw, 2.45rem);
+
+      line-height: 1.28;
+
+      font-weight: 900;
+
+      letter-spacing: -0.025em;
+
+      margin: 0 0 20px;
+    }
+
+
+    /* =========================================
+       CONTENT
+    ========================================= */
+
+    .content {
+      color: var(--content);
+
+      font-size:
+        clamp(1.02rem, 4.6vw, 1.18rem);
+
+      line-height: 1.95;
+
+      font-weight: 500;
+
+      letter-spacing: 0.005em;
+    }
+
+
+    /* =========================================
+       DIVIDER
+    ========================================= */
+
+    .divider {
+      width: 42px;
+      height: 3px;
+
+      border-radius: 99px;
+
+      margin:
+        22px 0 18px;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--accent),
+          transparent
+        );
+    }
+
+
+    /* =========================================
+       MANTRA
+    ========================================= */
+
+    .mantra {
+      margin-top: auto;
+
+      padding-top: 19px;
+
+      text-align: center;
+
+      color: #d9a7be;
+
+      font-size: 0.82rem;
+
+      font-weight: 700;
+
+      letter-spacing: 0.02em;
+
+      border-top:
+        1px solid var(--line);
+    }
+
+
+    /* =========================================
+       NAVIGATION
+    ========================================= */
+
+    .nav {
+      display: grid;
+
+      grid-template-columns: 1fr auto 1fr;
+
+      align-items: center;
+
+      gap: 10px;
+
+      width: 100%;
+    }
+
+
+    .nav-button {
+      min-height: 48px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,0.045);
+
+      color: var(--text);
+
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      font-size: 0.91rem;
+
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform 150ms ease,
+        background 150ms ease,
+        border-color 150ms ease;
+    }
+
+
+    .nav-button:active {
+      transform: scale(0.96);
+    }
+
+
+    .nav-button:hover {
+      background:
+        rgba(255,255,255,0.075);
+    }
+
+
+    .nav-button.primary {
+      background:
+        linear-gradient(
+          145deg,
+          #a36585,
+          #87516f
+        );
+
+      border-color:
+        rgba(255,255,255,0.06);
+
+      box-shadow:
+        0 8px 24px rgba(117,55,83,0.25);
+    }
+
+
+    .nav-button.primary:hover {
+      background:
+        linear-gradient(
+          145deg,
+          #ad6c8d,
+          #8d5775
+        );
+    }
+
+
+    .nav-button:disabled {
+      opacity: 0.28;
+
+      cursor: not-allowed;
+
+      box-shadow: none;
+    }
+
+
+    .nav-button svg {
+      width: 17px;
+      height: 17px;
+    }
+
+
+    .progress-number {
+      min-width: 58px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 0.76rem;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================================
+       SWIPE HINT
+    ========================================= */
+
+    .swipe-hint {
+      text-align: center;
+
+      color: #777177;
+
+      font-size: 0.65rem;
+
+      margin-top: -2px;
+
+      opacity: 0.85;
+    }
+
+
+    /* =========================================
+       ANIMATION
+    ========================================= */
+
+    .content-animation {
+      animation:
+        cardContentIn 320ms ease both;
+    }
+
+
+    @keyframes cardContentIn {
+
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    /* =========================================
+       SMALL PHONES
+    ========================================= */
+
+    @media (max-width: 390px) {
+
+      .app {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+
+      .shell {
+        gap: 11px;
+      }
+
+
+      .card {
+        min-height: 64dvh;
+        max-height: 69dvh;
+
+        border-radius: 24px;
+      }
+
+
+      .card-inner {
+        padding:
+          23px 19px 18px;
+      }
+
+
+      .title {
+        font-size: 1.55rem;
+
+        margin-bottom: 17px;
+      }
+
+
+      .content {
+        font-size: 0.99rem;
+
+        line-height: 1.85;
+      }
+
+
+      .nav-button {
+        min-height: 46px;
+
+        font-size: 0.86rem;
+      }
+
+    }
+
+
+    /* =========================================
+       LARGER SCREENS
+    ========================================= */
+
+    @media (min-width: 700px) {
+
+      .app {
+        padding-top: 30px;
+        padding-bottom: 30px;
+      }
+
+
+      .card {
+        min-height: 600px;
+      }
+
+
+      .card-inner {
+        padding:
+          40px 42px 30px;
+      }
+
+
+      .title {
+        font-size: 2.45rem;
+      }
+
+
+      .content {
+        font-size: 1.16rem;
+      }
+
+    }
+
+
+    /* =========================================
+       REDUCED MOTION
+    ========================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+
+    }
+
+  </style>
 </head>
+
+
 <body>
-<main>
-  <div class="card-wrap" id="cardWrap"></div>
-  <div class="nav">
-    <button id="prev" aria-label="मागील दिवस">← मागील</button>
-    <div class="progress" id="progress">१ / ३०</div>
-    <button id="next" class="primary" aria-label="पुढील दिवस">पुढील →</button>
-  </div>
-</main>
 
-<script>
-const days = [
+  <div id="root"></div>
 
 
-["दिवस १","प्रेम आणि सुरक्षितता","माझ्या बाळा, आई आणि बाबा दोघेही तुझ्यावर मनापासून प्रेम करतात. तू आमच्यासाठी अमूल्य आहेस. तुझ्या मनात प्रेम, शांतता आणि सुरक्षिततेची भावना सदैव राहो. तू स्वतःवर प्रेम करणारा आणि इतरांवरही प्रेम करणारा सुंदर मनाचा माणूस हो."],
-["दिवस २","सत्य आणि प्रामाणिकपणा","बाळा, आयुष्यात सत्याची साथ कधीही सोडू नकोस. प्रामाणिकपणा तुझी ताकद असू दे. चूक झाली तर ती मान्य करण्याचे धैर्य आणि त्यातून शिकण्याची बुद्धी तुला लाभो. तुझ्या शब्दात आणि कृतीत विश्वासार्हता असो."],
-["दिवस ३","ज्ञानाची ओढ","लाडक्या बाळा, तुला आयुष्यभर शिकण्याची जिज्ञासा असो. पुस्तकांमधून, निसर्गातून, माणसांकडून आणि स्वतःच्या अनुभवांतून ज्ञान घे. तुला प्रश्न विचारायला कधीही भीती वाटू नये. तुझी बुद्धी जिज्ञासू, शांत आणि विवेकी राहो."],
-["दिवस ४","करुणा आणि भूतदया","माझ्या बाळा, ज्यांना आपली मदत हवी आहे त्यांच्याबद्दल तुझ्या मनात करुणा असू दे. माणूस असो, प्राणी असो किंवा निसर्ग—सर्व जीवांबद्दल दया आणि आदर ठेव. दुसऱ्याचे दुःख समजून घेण्याची संवेदनशीलता तुझ्यात सदैव राहो."],
-["दिवस ५","संत ज्ञानेश्वरांची ज्ञानवृत्ती","बाळा, संत ज्ञानेश्वरांच्या जीवनातून ज्ञान, अध्यात्म, नम्रता आणि सर्वांमध्ये चांगुलपणा पाहण्याची दृष्टी शिकूया. तुझं ज्ञान तुला अहंकारी न बनवता अधिक नम्र आणि प्रेमळ बनवो. ज्ञान आणि करुणा तुझ्या जीवनात सोबत चालोत."],
-["दिवस ६","छत्रपती शिवाजी महाराजांचे शौर्य","लाडक्या बाळा, छत्रपती शिवाजी महाराजांच्या जीवनातून धैर्य, नेतृत्व, स्वाभिमान, न्यायबुद्धी आणि लोककल्याणाची प्रेरणा घे. शक्ती मिळाली तर तिचा उपयोग दुर्बलांचे रक्षण आणि समाजाच्या हितासाठी कर. धैर्याबरोबर विवेकही तुझ्यात असू दे."],
-["दिवस ७","भक्ती आणि श्रद्धा","माझ्या बाळा, तुझ्या मनात परमेश्वराविषयी प्रेम आणि कृतज्ञता असू दे. भक्ती म्हणजे फक्त प्रार्थना नव्हे, तर चांगली कर्मे, सत्य, सेवा आणि करुणाही आहे. श्रद्धेसोबत विवेक ठेव आणि प्रत्येक गोष्ट समजून घेण्याची इच्छा कायम ठेव."],
-["दिवस ८","भक्त प्रल्हादाची निष्ठा","बाळा, भक्त प्रल्हादाच्या कथेतून सत्य आणि चांगुलपणावर दृढ विश्वास ठेवण्याची प्रेरणा घे. योग्य गोष्ट समोर आली तर भीतीमुळे चुकीच्या गोष्टीला साथ देऊ नकोस. नम्र राहा, पण तुझ्या सद्सद्विवेकबुद्धीवर ठाम राहा."],
-["दिवस ९","झाशीच्या राणीचे धैर्य","लाडक्या बाळा, राणी लक्ष्मीबाईंच्या जीवनातून धैर्य, आत्मविश्वास, स्वाभिमान आणि संकटात न डगमगण्याची प्रेरणा घे. कठीण प्रसंग आले तरी प्रयत्न करत राहा. तुझ्यात शौर्य असो, पण ते नेहमी न्याय आणि विवेकाच्या मार्गाने वापर."],
-["दिवस १०","डॉ. बाबासाहेब आंबेडकरांचे शिक्षण","माझ्या बाळा, डॉ. बाबासाहेब आंबेडकरांच्या जीवनातून शिक्षण, समानता, न्याय, स्वाभिमान आणि संविधानिक मूल्यांची प्रेरणा घे. कोणालाही जन्म, जात, भाषा, धर्म किंवा परिस्थितीमुळे कमी समजू नकोस. प्रत्येक माणसाच्या सन्मानाचा आदर कर."],
-["दिवस ११","श्रीकृष्णाची बुद्धिमत्ता","बाळा, श्रीकृष्णाच्या कथांमधून परिस्थितीनुसार योग्य निर्णय घेण्याची बुद्धी, कर्तव्यभावना आणि जीवनाकडे समतोल दृष्टीने पाहण्याची प्रेरणा घे. भावनांचा आदर कर, पण निर्णय घेताना विवेक वापर. कठीण प्रसंगात शांत बुद्धी तुझी सोबती असो."],
-["दिवस १२","विवेक आणि तर्क","माझ्या बाळा, प्रत्येक गोष्ट फक्त ऐकली म्हणून खरी मानू नकोस. प्रश्न विचार, पुरावे शोध, विचार कर आणि मग निष्कर्ष काढ. वैज्ञानिक दृष्टिकोन आणि तार्किक विचार तुझ्या जीवनाचा आधार असू दे. जिज्ञासा कधीही हरवू देऊ नकोस."],
-["दिवस १३","दान आणि सेवा","लाडक्या बाळा, तुझ्याकडे जे काही अधिक आहे त्यातून गरजूंसाठी काही देण्याची वृत्ती तुझ्यात असो. दान म्हणजे फक्त पैसा नव्हे—वेळ, ज्ञान, प्रेम, मदत आणि चांगले शब्दही दान असतात. देताना अहंकार नको; सेवेत आनंद शोध."],
-["दिवस १४","माया आणि कुटुंबप्रेम","बाळा, तुझ्या मनात आई-बाबा, आजी-आजोबा, नातेवाईक, मित्र आणि समाजाबद्दल प्रेम असू दे. प्रेम म्हणजे फक्त आपलेपणा नाही; समोरच्याला समजून घेणे आणि त्याचा आदर करणेही प्रेम आहे. तुझ्या मनात मायेची ऊब सदैव राहो."],
-["दिवस १५","तेज आणि आत्मविश्वास","माझ्या बाळा, तुझ्या व्यक्तिमत्त्वात ज्ञानाचं तेज आणि चांगुलपणाची चमक असू दे. आत्मविश्वास ठेव, पण अहंकार नको. स्वतःची किंमत जाण आणि त्याच वेळी इतरांचाही सन्मान कर."],
-["दिवस १६","क्षमा आणि संयम","बाळा, राग आला तरी थांबून विचार करण्याची शक्ती तुझ्यात असो. प्रत्येक वेळी प्रतिक्रिया देण्याऐवजी योग्य उत्तर निवडण्याचा संयम ठेव. क्षमा करण्याची ताकद आणि स्वतःच्या चुका सुधारण्याची नम्रता तुला लाभो."],
-["दिवस १७","उदारमतवाद आणि स्वातंत्र्य","लाडक्या बाळा, स्वतःचे विचार ठेव आणि इतरांनाही त्यांचे विचार ठेवण्याचा अधिकार दे. तुझ्यापेक्षा वेगळ्या मताच्या व्यक्तीचा द्वेष करू नकोस. मतभेद असू शकतात, पण माणुसकी आणि आदर कायम राहू दे."],
-["दिवस १८","देशप्रेम","माझ्या बाळा, आपल्या देशावर प्रेम कर. देशप्रेम म्हणजे फक्त घोषणा नव्हे—प्रामाणिकपणे काम करणे, नियम पाळणे, पर्यावरणाची काळजी घेणे, इतरांना मदत करणे आणि समाज सुधारण्यासाठी योगदान देणे हेही देशप्रेम आहे."],
-["दिवस १९","स्वातंत्र्यवीर सावरकरांकडून प्रेरणा","बाळा, विनायक दामोदर सावरकरांच्या जीवनातून धैर्य, लेखन, दृढनिश्चय आणि कठीण परिस्थितीत टिकून राहण्याची प्रेरणा घेता येते. इतिहासातील कोणत्याही व्यक्तीचा अभ्यास करताना त्यांच्या कार्यातील विविध पैलू समजून घे आणि स्वतःची स्वतंत्र, विवेकी मते तयार कर."],
-["दिवस २०","नम्रता","लाडक्या बाळा, कितीही ज्ञान मिळालं किंवा कितीही यश मिळालं तरी नम्र राहा. तुझ्यापेक्षा वेगळ्या व्यक्तीकडूनही काहीतरी शिकता येतं हे लक्षात ठेव. मोठेपणा पदात नसतो; तो स्वभावात असतो."],
-["दिवस २१","अपयशातून शिकणे","माझ्या बाळा, आयुष्यात प्रत्येक प्रयत्न यशस्वी होईलच असं नाही. अपयश आलं तरी स्वतःला कमी समजू नकोस. त्यातून काय शिकता येईल हे शोध आणि पुन्हा प्रयत्न कर. धैर्य म्हणजे कधीही न पडणे नव्हे; पडल्यावर पुन्हा उभे राहणे आहे."],
-["दिवस २२","निसर्गप्रेम","बाळा, झाडे, नद्या, पर्वत, प्राणी-पक्षी आणि पृथ्वीवर प्रेम कर. निसर्ग आपल्याला खूप काही देतो; म्हणून त्याची काळजी घे. साधेपणा, स्वच्छता आणि पर्यावरणाची जबाबदारी तुझ्या जीवनाचा भाग असू दे."],
-["दिवस २३","संवाद आणि ऐकण्याची कला","लाडक्या बाळा, चांगलं बोलण्याइतकंच चांगलं ऐकणंही महत्त्वाचं आहे. दुसऱ्याचं म्हणणं पूर्ण ऐकून घे. मतभेद झाले तरी शांतपणे संवाद साध. शब्दांनी जखम करण्याऐवजी शब्दांनी आधार देण्याची सवय लाव."],
-["दिवस २४","न्याय आणि समानता","माझ्या बाळा, प्रत्येक व्यक्तीला समान सन्मान मिळायला हवा असा विश्वास ठेव. अन्याय दिसला तर शक्य तिथे शांतपणे आणि योग्य मार्गाने त्याविरुद्ध उभा राहा. तुझ्या शक्तीचा उपयोग स्वतःपुरता न करता समाजाच्या भल्यासाठी कर."],
-["दिवस २५","शिस्त आणि कर्तव्य","बाळा, स्वप्नं मोठी ठेव पण त्यासाठी शिस्तही ठेव. वेळेची किंमत जाण, दिलेला शब्द पाळ आणि तुझी जबाबदारी प्रामाणिकपणे पूर्ण कर. रोजची छोटी चांगली कृती भविष्यात मोठा बदल घडवते."],
-["दिवस २६","सर्जनशीलता","लाडक्या बाळा, तुझ्या कल्पनांना पंख दे. प्रश्न विचार, नवीन कल्पना कर, संगीत, कला, विज्ञान, लेखन किंवा तुला आवडणाऱ्या कोणत्याही क्षेत्रात स्वतःला व्यक्त कर. जग जसं आहे तसं स्वीकारण्याबरोबर ते आणखी सुंदर करण्याची कल्पनाशक्ती ठेव."],
-["दिवस २७","विज्ञान आणि अध्यात्माचा समतोल","माझ्या बाळा, तुझ्या मनात ज्ञानाची जिज्ञासा आणि अंतर्मनात शांतता दोन्ही असू दे. विज्ञान तुला जग समजून घेण्यास मदत करो आणि अध्यात्म तुला स्वतःकडे पाहायला शिकवो. श्रद्धा ठेव, पण प्रश्न विचारण्याची मोकळीकही ठेव."],
-["दिवस २८","धैर्य, शौर्य आणि विवेक","बाळा, अन्याय, भीती किंवा अडचण आली तर धैर्याने उभं राहण्याची ताकद तुझ्यात असो. पण प्रत्येक संघर्षापूर्वी विचार कर—काय योग्य आहे, काय आवश्यक आहे आणि कोणाला त्याचा फायदा होईल. शौर्याला विवेकाची साथ लाभो."],
-["दिवस २९","सर्व गुणांचा सुंदर संगम","लाडक्या बाळा, तुला ज्ञानेश्वरांचे ज्ञान, शिवाजी महाराजांचे नेतृत्व आणि शौर्य, प्रल्हादाची निष्ठा, राणी लक्ष्मीबाईंचे धैर्य, बाबासाहेबांचे शिक्षण व न्यायबुद्धी, श्रीकृष्णाची बुद्धिमत्ता आणि सावरकरांच्या जीवनातील दृढनिश्चयासारख्या गुणांतून प्रेरणा मिळो. पण सर्वांत महत्त्वाचं—तू स्वतःचा स्वतंत्र विचार करणारा, प्रेमळ, वैज्ञानिक दृष्टिकोन असलेला आणि माणुसकी जपणारा व्यक्ती हो."],
-["दिवस ३०","आई-बाबांचा आशीर्वाद","माझ्या बाळा, आमची तुझ्यासाठी सर्वांत मोठी इच्छा आहे की तू केवळ यशस्वी नव्हे तर चांगला माणूस हो. तुझ्याकडे ज्ञान असो पण त्यासोबत करुणा असो; शक्ती असो पण त्यासोबत नम्रता असो; श्रद्धा असो पण त्यासोबत विवेक असो; देशप्रेम असो पण त्यासोबत सर्व माणसांबद्दल माणुसकी असो. तू प्रेम कर, शिक, प्रश्न विचार, सत्य शोध, सेवा कर आणि तुझ्या आयुष्यातून इतरांच्या जीवनातही प्रकाश आण. आई आणि बाबा तुझ्यावर मनापासून प्रेम करतात आणि तुझ्या सुंदर भविष्यासाठी सदैव शुभेच्छा देतात. ❤️"]
-];
+  <script>
 
-const marathiDigits = n => String(n).replace(/[0-9]/g, d => "०१२३४५६७८९"[d]);
-let current = 0;
+    const {
+      useState,
+      useRef,
+      useEffect
+    } = React;
 
-const wrap = document.getElementById("cardWrap");
-const progress = document.getElementById("progress");
-const prev = document.getElementById("prev");
-const next = document.getElementById("next");
 
-function render(){
-  const d = days[current];
-  wrap.innerHTML = `
-    <article class="card" aria-live="polite">
-      <div>
-        <div class="day">${d[0]}</div>
-        <div class="title">${d[1]}</div>
-        <div class="content">${d[2]}</div>
-      </div>
-      <div class="mantra">॥ जय श्री राम ॥ &nbsp; ♥ &nbsp; ॥ जय श्री कृष्ण ॥</div>
-    </article>`;
-  progress.textContent = `${marathiDigits(current+1)} / ${marathiDigits(days.length)}`;
-  prev.disabled = current === 0;
-  next.disabled = current === days.length - 1;
-}
+    /* =====================================================
+       30 DAYS CONTENT
+    ===================================================== */
 
-function go(delta){
-  const n = current + delta;
-  if(n < 0 || n >= days.length) return;
-  current = n;
-  render();
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-prev.onclick=()=>go(-1);
-next.onclick=()=>go(1);
+    const days = [
 
-let startX=0,startY=0;
-wrap.addEventListener("touchstart",e=>{
-  startX=e.changedTouches[0].screenX;
-  startY=e.changedTouches[0].screenY;
-},{passive:true});
-wrap.addEventListener("touchend",e=>{
-  const x=e.changedTouches[0].screenX, y=e.changedTouches[0].screenY;
-  const dx=x-startX, dy=y-startY;
-  if(Math.abs(dx)>50 && Math.abs(dx)>Math.abs(dy)*1.15) go(dx<0?1:-1);
-},{passive:true});
+      [
+        "दिवस १",
+        "प्रेम आणि सुरक्षितता",
+        "माझ्या बाळा, आई आणि बाबा दोघेही तुझ्यावर मनापासून प्रेम करतात. तू आमच्यासाठी अमूल्य आहेस. तुझ्या मनात प्रेम, शांतता आणि सुरक्षिततेची भावना सदैव राहो. तू स्वतःवर प्रेम करणारा आणि इतरांवरही प्रेम करणारा सुंदर मनाचा माणूस हो."
+      ],
 
-document.addEventListener("keydown",e=>{
-  if(e.key==="ArrowRight") go(1);
-  if(e.key==="ArrowLeft") go(-1);
-});
-render();
-</script>
+      [
+        "दिवस २",
+        "सत्य आणि प्रामाणिकपणा",
+        "बाळा, आयुष्यात सत्याची साथ कधीही सोडू नकोस. प्रामाणिकपणा तुझी ताकद असू दे. चूक झाली तर ती मान्य करण्याचे धैर्य आणि त्यातून शिकण्याची बुद्धी तुला लाभो. तुझ्या शब्दात आणि कृतीत विश्वासार्हता असो."
+      ],
+
+      [
+        "दिवस ३",
+        "ज्ञानाची ओढ",
+        "लाडक्या बाळा, तुला आयुष्यभर शिकण्याची जिज्ञासा असो. पुस्तकांमधून, निसर्गातून, माणसांकडून आणि स्वतःच्या अनुभवांतून ज्ञान घे. तुला प्रश्न विचारायला कधीही भीती वाटू नये. तुझी बुद्धी जिज्ञासू, शांत आणि विवेकी राहो."
+      ],
+
+      [
+        "दिवस ४",
+        "करुणा आणि भूतदया",
+        "माझ्या बाळा, ज्यांना आपली मदत हवी आहे त्यांच्याबद्दल तुझ्या मनात करुणा असू दे. माणूस असो, प्राणी असो किंवा निसर्ग—सर्व जीवांबद्दल दया आणि आदर ठेव. दुसऱ्याचे दुःख समजून घेण्याची संवेदनशीलता तुझ्यात सदैव राहो."
+      ],
+
+      [
+        "दिवस ५",
+        "संत ज्ञानेश्वरांची ज्ञानवृत्ती",
+        "बाळा, संत ज्ञानेश्वरांच्या जीवनातून ज्ञान, अध्यात्म, नम्रता आणि सर्वांमध्ये चांगुलपणा पाहण्याची दृष्टी शिकूया. तुझं ज्ञान तुला अहंकारी न बनवता अधिक नम्र आणि प्रेमळ बनवो. ज्ञान आणि करुणा तुझ्या जीवनात सोबत चालोत."
+      ],
+
+      [
+        "दिवस ६",
+        "छत्रपती शिवाजी महाराजांचे शौर्य",
+        "लाडक्या बाळा, छत्रपती शिवाजी महाराजांच्या जीवनातून धैर्य, नेतृत्व, स्वाभिमान, न्यायबुद्धी आणि लोककल्याणाची प्रेरणा घे. शक्ती मिळाली तर तिचा उपयोग दुर्बलांचे रक्षण आणि समाजाच्या हितासाठी कर. धैर्याबरोबर विवेकही तुझ्यात असू दे."
+      ],
+
+      [
+        "दिवस ७",
+        "भक्ती आणि श्रद्धा",
+        "माझ्या बाळा, तुझ्या मनात परमेश्वराविषयी प्रेम आणि कृतज्ञता असू दे. भक्ती म्हणजे फक्त प्रार्थना नव्हे, तर चांगली कर्मे, सत्य, सेवा आणि करुणाही आहे. श्रद्धेसोबत विवेक ठेव आणि प्रत्येक गोष्ट समजून घेण्याची इच्छा कायम ठेव."
+      ],
+
+      [
+        "दिवस ८",
+        "भक्त प्रल्हादाची निष्ठा",
+        "बाळा, भक्त प्रल्हादाच्या कथेतून सत्य आणि चांगुलपणावर दृढ विश्वास ठेवण्याची प्रेरणा घे. योग्य गोष्ट समोर आली तर भीतीमुळे चुकीच्या गोष्टीला साथ देऊ नकोस. नम्र राहा, पण तुझ्या सद्सद्विवेकबुद्धीवर ठाम राहा."
+      ],
+
+      [
+        "दिवस ९",
+        "झाशीच्या राणीचे धैर्य",
+        "लाडक्या बाळा, राणी लक्ष्मीबाईंच्या जीवनातून धैर्य, आत्मविश्वास, स्वाभिमान आणि संकटात न डगमगण्याची प्रेरणा घे. कठीण प्रसंग आले तरी प्रयत्न करत राहा. तुझ्यात शौर्य असो, पण ते नेहमी न्याय आणि विवेकाच्या मार्गाने वापर."
+      ],
+
+      [
+        "दिवस १०",
+        "डॉ. बाबासाहेब आंबेडकरांचे शिक्षण",
+        "माझ्या बाळा, डॉ. बाबासाहेब आंबेडकरांच्या जीवनातून शिक्षण, समानता, न्याय, स्वाभिमान आणि संविधानिक मूल्यांची प्रेरणा घे. कोणालाही जन्म, जात, भाषा, धर्म किंवा परिस्थितीमुळे कमी समजू नकोस. प्रत्येक माणसाच्या सन्मानाचा आदर कर."
+      ],
+
+      [
+        "दिवस ११",
+        "श्रीकृष्णाची बुद्धिमत्ता",
+        "बाळा, श्रीकृष्णाच्या कथांमधून परिस्थितीनुसार योग्य निर्णय घेण्याची बुद्धी, कर्तव्यभावना आणि जीवनाकडे समतोल दृष्टीने पाहण्याची प्रेरणा घे. भावनांचा आदर कर, पण निर्णय घेताना विवेक वापर. कठीण प्रसंगात शांत बुद्धी तुझी सोबती असो."
+      ],
+
+      [
+        "दिवस १२",
+        "विवेक आणि तर्क",
+        "माझ्या बाळा, प्रत्येक गोष्ट फक्त ऐकली म्हणून खरी मानू नकोस. प्रश्न विचार, पुरावे शोध, विचार कर आणि मग निष्कर्ष काढ. वैज्ञानिक दृष्टिकोन आणि तार्किक विचार तुझ्या जीवनाचा आधार असू दे. जिज्ञासा कधीही हरवू देऊ नकोस."
+      ],
+
+      [
+        "दिवस १३",
+        "दान आणि सेवा",
+        "लाडक्या बाळा, तुझ्याकडे जे काही अधिक आहे त्यातून गरजूंसाठी काही देण्याची वृत्ती तुझ्यात असो. दान म्हणजे फक्त पैसा नव्हे—वेळ, ज्ञान, प्रेम, मदत आणि चांगले शब्दही दान असतात. देताना अहंकार नको; सेवेत आनंद शोध."
+      ],
+
+      [
+        "दिवस १४",
+        "माया आणि कुटुंबप्रेम",
+        "बाळा, तुझ्या मनात आई-बाबा, आजी-आजोबा, नातेवाईक, मित्र आणि समाजाबद्दल प्रेम असू दे. प्रेम म्हणजे फक्त आपलेपणा नाही; समोरच्याला समजून घेणे आणि त्याचा आदर करणेही प्रेम आहे. तुझ्या मनात मायेची ऊब सदैव राहो."
+      ],
+
+      [
+        "दिवस १५",
+        "तेज आणि आत्मविश्वास",
+        "माझ्या बाळा, तुझ्या व्यक्तिमत्त्वात ज्ञानाचं तेज आणि चांगुलपणाची चमक असू दे. आत्मविश्वास ठेव, पण अहंकार नको. स्वतःची किंमत जाण आणि त्याच वेळी इतरांचाही सन्मान कर."
+      ],
+
+      [
+        "दिवस १६",
+        "क्षमा आणि संयम",
+        "बाळा, राग आला तरी थांबून विचार करण्याची शक्ती तुझ्यात असो. प्रत्येक वेळी प्रतिक्रिया देण्याऐवजी योग्य उत्तर निवडण्याचा संयम ठेव. क्षमा करण्याची ताकद आणि स्वतःच्या चुका सुधारण्याची नम्रता तुला लाभो."
+      ],
+
+      [
+        "दिवस १७",
+        "उदारमतवाद आणि स्वातंत्र्य",
+        "लाडक्या बाळा, स्वतःचे विचार ठेव आणि इतरांनाही त्यांचे विचार ठेवण्याचा अधिकार दे. तुझ्यापेक्षा वेगळ्या मताच्या व्यक्तीचा द्वेष करू नकोस. मतभेद असू शकतात, पण माणुसकी आणि आदर कायम राहू दे."
+      ],
+
+      [
+        "दिवस १८",
+        "देशप्रेम",
+        "माझ्या बाळा, आपल्या देशावर प्रेम कर. देशप्रेम म्हणजे फक्त घोषणा नव्हे—प्रामाणिकपणे काम करणे, नियम पाळणे, पर्यावरणाची काळजी घेणे, इतरांना मदत करणे आणि समाज सुधारण्यासाठी योगदान देणे हेही देशप्रेम आहे."
+      ],
+
+      [
+        "दिवस १९",
+        "स्वातंत्र्यवीर सावरकरांकडून प्रेरणा",
+        "बाळा, विनायक दामोदर सावरकरांच्या जीवनातून धैर्य, लेखन, दृढनिश्चय आणि कठीण परिस्थितीत टिकून राहण्याची प्रेरणा घेता येते. इतिहासातील कोणत्याही व्यक्तीचा अभ्यास करताना त्यांच्या कार्यातील विविध पैलू समजून घे आणि स्वतःची स्वतंत्र, विवेकी मते तयार कर."
+      ],
+
+      [
+        "दिवस २०",
+        "नम्रता",
+        "लाडक्या बाळा, कितीही ज्ञान मिळालं किंवा कितीही यश मिळालं तरी नम्र राहा. तुझ्यापेक्षा वेगळ्या व्यक्तीकडूनही काहीतरी शिकता येतं हे लक्षात ठेव. मोठेपणा पदात नसतो; तो स्वभावात असतो."
+      ],
+
+      [
+        "दिवस २१",
+        "अपयशातून शिकणे",
+        "माझ्या बाळा, आयुष्यात प्रत्येक प्रयत्न यशस्वी होईलच असं नाही. अपयश आलं तरी स्वतःला कमी समजू नकोस. त्यातून काय शिकता येईल हे शोध आणि पुन्हा प्रयत्न कर. धैर्य म्हणजे कधीही न पडणे नव्हे; पडल्यावर पुन्हा उभे राहणे आहे."
+      ],
+
+      [
+        "दिवस २२",
+        "निसर्गप्रेम",
+        "बाळा, झाडे, नद्या, पर्वत, प्राणी-पक्षी आणि पृथ्वीवर प्रेम कर. निसर्ग आपल्याला खूप काही देतो; म्हणून त्याची काळजी घे. साधेपणा, स्वच्छता आणि पर्यावरणाची जबाबदारी तुझ्या जीवनाचा भाग असू दे."
+      ],
+
+      [
+        "दिवस २३",
+        "संवाद आणि ऐकण्याची कला",
+        "लाडक्या बाळा, चांगलं बोलण्याइतकंच चांगलं ऐकणंही महत्त्वाचं आहे. दुसऱ्याचं म्हणणं पूर्ण ऐकून घे. मतभेद झाले तरी शांतपणे संवाद साध. शब्दांनी जखम करण्याऐवजी शब्दांनी आधार देण्याची सवय लाव."
+      ],
+
+      [
+        "दिवस २४",
+        "न्याय आणि समानता",
+        "माझ्या बाळा, प्रत्येक व्यक्तीला समान सन्मान मिळायला हवा असा विश्वास ठेव. अन्याय दिसला तर शक्य तिथे शांतपणे आणि योग्य मार्गाने त्याविरुद्ध उभा राहा. तुझ्या शक्तीचा उपयोग स्वतःपुरता न करता समाजाच्या भल्यासाठी कर."
+      ],
+
+      [
+        "दिवस २५",
+        "शिस्त आणि कर्तव्य",
+        "बाळा, स्वप्नं मोठी ठेव पण त्यासाठी शिस्तही ठेव. वेळेची किंमत जाण, दिलेला शब्द पाळ आणि तुझी जबाबदारी प्रामाणिकपणे पूर्ण कर. रोजची छोटी चांगली कृती भविष्यात मोठा बदल घडवते."
+      ],
+
+      [
+        "दिवस २६",
+        "सर्जनशीलता",
+        "लाडक्या बाळा, तुझ्या कल्पनांना पंख दे. प्रश्न विचार, नवीन कल्पना कर, संगीत, कला, विज्ञान, लेखन किंवा तुला आवडणाऱ्या कोणत्याही क्षेत्रात स्वतःला व्यक्त कर. जग जसं आहे तसं स्वीकारण्याबरोबर ते आणखी सुंदर करण्याची कल्पनाशक्ती ठेव."
+      ],
+
+      [
+        "दिवस २७",
+        "विज्ञान आणि अध्यात्माचा समतोल",
+        "माझ्या बाळा, तुझ्या मनात ज्ञानाची जिज्ञासा आणि अंतर्मनात शांतता दोन्ही असू दे. विज्ञान तुला जग समजून घेण्यास मदत करो आणि अध्यात्म तुला स्वतःकडे पाहायला शिकवो. श्रद्धा ठेव, पण प्रश्न विचारण्याची मोकळीकही ठेव."
+      ],
+
+      [
+        "दिवस २८",
+        "धैर्य, शौर्य आणि विवेक",
+        "बाळा, अन्याय, भीती किंवा अडचण आली तर धैर्याने उभं राहण्याची ताकद तुझ्यात असो. पण प्रत्येक संघर्षापूर्वी विचार कर—काय योग्य आहे, काय आवश्यक आहे आणि कोणाला त्याचा फायदा होईल. शौर्याला विवेकाची साथ लाभो."
+      ],
+
+      [
+        "दिवस २९",
+        "सर्व गुणांचा सुंदर संगम",
+        "लाडक्या बाळा, तुला ज्ञानेश्वरांचे ज्ञान, शिवाजी महाराजांचे नेतृत्व आणि शौर्य, प्रल्हादाची निष्ठा, राणी लक्ष्मीबाईंचे धैर्य, बाबासाहेबांचे शिक्षण व न्यायबुद्धी, श्रीकृष्णाची बुद्धिमत्ता आणि सावरकरांच्या जीवनातील दृढनिश्चयासारख्या गुणांतून प्रेरणा मिळो. पण सर्वांत महत्त्वाचं—तू स्वतःचा स्वतंत्र विचार करणारा, प्रेमळ, वैज्ञानिक दृष्टिकोन असलेला आणि माणुसकी जपणारा व्यक्ती हो."
+      ],
+
+      [
+        "दिवस ३०",
+        "आई-बाबांचा आशीर्वाद",
+        "माझ्या बाळा, आमची तुझ्यासाठी सर्वांत मोठी इच्छा आहे की तू केवळ यशस्वी नव्हे तर चांगला माणूस हो. तुझ्याकडे ज्ञान असो पण त्यासोबत करुणा असो; शक्ती असो पण त्यासोबत नम्रता असो; श्रद्धा असो पण त्यासोबत विवेक असो; देशप्रेम असो पण त्यासोबत सर्व माणसांबद्दल माणुसकी असो. तू प्रेम कर, शिक, प्रश्न विचार, सत्य शोध, सेवा कर आणि तुझ्या आयुष्यातून इतरांच्या जीवनातही प्रकाश आण. आई आणि बाबा तुझ्यावर मनापासून प्रेम करतात आणि तुझ्या सुंदर भविष्यासाठी सदैव शुभेच्छा देतात. ❤️"
+      ]
+
+    ];
+
+
+    /* =====================================================
+       HELPERS
+    ===================================================== */
+
+    function marathiNumber(number) {
+
+      return String(number).replace(
+        /[0-9]/g,
+        function(digit) {
+          return "०१२३४५६७८९"[digit];
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       APP
+    ===================================================== */
+
+    function App() {
+
+      const [current, setCurrent] = useState(0);
+
+      const [direction, setDirection] =
+        useState(0);
+
+      const touchStart =
+        useRef({
+          x: 0,
+          y: 0
+        });
+
+
+      const day = days[current];
+
+
+      function go(nextDirection) {
+
+        setCurrent(function(value) {
+
+          const next =
+            Math.max(
+              0,
+              Math.min(
+                days.length - 1,
+                value + nextDirection
+              )
+            );
+
+          if (next !== value) {
+            setDirection(nextDirection);
+          }
+
+          return next;
+
+        });
+
+      }
+
+
+      function handleTouchStart(event) {
+
+        const touch =
+          event.changedTouches[0];
+
+        touchStart.current = {
+          x: touch.screenX,
+          y: touch.screenY
+        };
+
+      }
+
+
+      function handleTouchEnd(event) {
+
+        const touch =
+          event.changedTouches[0];
+
+        const dx =
+          touch.screenX -
+          touchStart.current.x;
+
+        const dy =
+          touch.screenY -
+          touchStart.current.y;
+
+
+        if (
+          Math.abs(dx) > 55 &&
+          Math.abs(dx) >
+            Math.abs(dy) * 1.15
+        ) {
+
+          if (dx < 0) {
+            go(1);
+          } else {
+            go(-1);
+          }
+
+        }
+
+      }
+
+
+      useEffect(function() {
+
+        function handleKey(event) {
+
+          if (event.key === "ArrowRight") {
+            go(1);
+          }
+
+          if (event.key === "ArrowLeft") {
+            go(-1);
+          }
+
+        }
+
+
+        window.addEventListener(
+          "keydown",
+          handleKey
+        );
+
+
+        return function() {
+
+          window.removeEventListener(
+            "keydown",
+            handleKey
+          );
+
+        };
+
+      });
+
+
+      useEffect(function() {
+
+        if (
+          window.lucide &&
+          window.lucide.createIcons
+        ) {
+
+          window.lucide.createIcons();
+
+        }
+
+      }, [current]);
+
+
+      const progress =
+        ((current + 1) /
+          days.length) *
+        100;
+
+
+      return React.createElement(
+        "div",
+        { className: "app" },
+
+
+        React.createElement(
+          "main",
+          { className: "shell" },
+
+
+          /* HEADER */
+
+          React.createElement(
+            "header",
+            { className: "topbar" },
+
+            React.createElement(
+              "div",
+              { className: "brand" },
+
+              React.createElement(
+                "div",
+                { className: "brand-icon" },
+
+                React.createElement(
+                  "i",
+                  {
+                    "data-lucide":
+                      "heart"
+                  }
+                )
+
+              ),
+
+              React.createElement(
+                "div",
+                { className: "brand-text" },
+
+                React.createElement(
+                  "div",
+                  { className: "brand-title" },
+                  "दैनिक गर्भसंवाद"
+                ),
+
+                React.createElement(
+                  "div",
+                  {
+                    className:
+                      "brand-subtitle"
+                  },
+                  "प्रेम • संस्कार • संवाद"
+                )
+
+              )
+
+            ),
+
+            React.createElement(
+              "div",
+              { className: "counter" },
+
+              "३० दिवस"
+
+            )
+
+          ),
+
+
+          /* PROGRESS */
+
+          React.createElement(
+            "div",
+            {
+              className:
+                "progress-track"
+            },
+
+            React.createElement(
+              "div",
+              {
+                className:
+                  "progress-fill",
+
+                style: {
+                  width:
+                    progress + "%"
+                }
+              }
+            )
+
+          ),
+
+
+          /* CARD */
+
+          React.createElement(
+            "section",
+            {
+              className: "card",
+
+              onTouchStart:
+                handleTouchStart,
+
+              onTouchEnd:
+                handleTouchEnd,
+
+              tabIndex: 0
+            },
+
+
+            React.createElement(
+              "div",
+              {
+                className:
+                  "card-inner"
+              },
+
+
+              React.createElement(
+                "div",
+                {
+                  className:
+                    "content-animation",
+
+                  key:
+                    current +
+                    "-" +
+                    direction
+                },
+
+
+                React.createElement(
+                  "div",
+                  {
+                    className:
+                      "day-row"
+                  },
+
+                  React.createElement(
+                    "span",
+                    {
+                      className:
+                        "day-dot"
+                    }
+                  ),
+
+                  React.createElement(
+                    "span",
+                    {
+                      className:
+                        "day"
+                    },
+
+                    day[0]
+                  )
+
+                ),
+
+
+                React.createElement(
+                  "h1",
+                  {
+                    className:
+                      "title"
+                  },
+
+                  day[1]
+
+                ),
+
+
+                React.createElement(
+                  "div",
+                  {
+                    className:
+                      "divider"
+                  }
+                ),
+
+
+                React.createElement(
+                  "div",
+                  {
+                    className:
+                      "content"
+                  },
+
+                  day[2]
+
+                )
+
+              ),
+
+
+              React.createElement(
+                "div",
+                {
+                  className:
+                    "mantra"
+                },
+
+                "॥ जय श्री राम ॥  ♥  ॥ जय श्री कृष्ण ॥"
+
+              )
+
+            )
+
+          ),
+
+
+          /* NAVIGATION */
+
+          React.createElement(
+            "nav",
+            {
+              className:
+                "nav",
+
+              "aria-label":
+                "दिवस नेव्हिगेशन"
+            },
+
+
+            React.createElement(
+              "button",
+              {
+                className:
+                  "nav-button",
+
+                disabled:
+                  current === 0,
+
+                onClick:
+                  function() {
+                    go(-1);
+                  },
+
+                "aria-label":
+                  "मागील दिवस"
+              },
+
+              React.createElement(
+                "i",
+                {
+                  "data-lucide":
+                    "chevron-left"
+                }
+              ),
+
+              "मागील"
+
+            ),
+
+
+            React.createElement(
+              "div",
+              {
+                className:
+                  "progress-number"
+              },
+
+              marathiNumber(
+                current + 1
+              ) +
+              " / " +
+              marathiNumber(
+                days.length
+              )
+
+            ),
+
+
+            React.createElement(
+              "button",
+              {
+                className:
+                  "nav-button primary",
+
+                disabled:
+                  current ===
+                  days.length - 1,
+
+                onClick:
+                  function() {
+                    go(1);
+                  },
+
+                "aria-label":
+                  "पुढील दिवस"
+              },
+
+              "पुढील",
+
+              React.createElement(
+                "i",
+                {
+                  "data-lucide":
+                    "chevron-right"
+                }
+              )
+
+            )
+
+          ),
+
+
+          React.createElement(
+            "div",
+            {
+              className:
+                "swipe-hint"
+            },
+
+            "←  स्क्रीनवर डावीकडे किंवा उजवीकडे स्वाइप करा  →"
+
+          )
+
+        )
+
+      );
+
+    }
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    ReactDOM
+      .createRoot(
+        document.getElementById("root")
+      )
+      .render(
+        React.createElement(App)
+      );
+
+  </script>
+
 </body>
 </html>
