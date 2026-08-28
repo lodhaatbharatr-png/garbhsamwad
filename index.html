@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff8f0">
+  <meta name="description" content="दैनिक गर्भ सुसंवाद — प्रेम • संस्कार • प्रार्थना">
+  <title>दैनिक गर्भ सुसंवाद</title>
+  <style>
+    :root{
+      --bg:#fffaf4;--surface:#fff;--ink:#382b25;--muted:#796c64;--line:#eadfd5;
+      --brand:#a85d42;--brand2:#7e3f2e;--soft:#f7ebe2;--gold:#c99546;
+      --shadow:0 10px 30px rgba(74,48,35,.08);--radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:linear-gradient(180deg,#fffaf5 0%,#fdf6ef 100%);
+      color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Devanagari","Nirmala UI",sans-serif;
+      line-height:1.65}
+    button,input{font:inherit}
+    .app{max-width:760px;margin:auto;padding:14px 14px 100px}
+    header{position:sticky;top:0;z-index:20;background:rgba(255,250,244,.92);
+      backdrop-filter:blur(16px);border-bottom:1px solid rgba(234,223,213,.75);padding:10px 0 12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;
+      background:var(--soft);font-size:25px;box-shadow:inset 0 0 0 1px #eeded2}
+    .brand h1{font-size:19px;line-height:1.15;margin:0;font-weight:800}
+    .brand p{font-size:12px;color:var(--muted);margin:3px 0 0}
+    .hero{padding:18px 2px 10px}
+    .hero h2{font-size:27px;line-height:1.2;margin:0 0 6px}
+    .hero p{margin:0;color:var(--muted);font-size:14px}
+    .search{margin-top:15px;position:relative}
+    .search input{width:100%;border:1px solid var(--line);background:#fff;border-radius:16px;
+      padding:13px 15px 13px 43px;outline:none;box-shadow:0 5px 18px rgba(60,40,30,.04)}
+    .search span{position:absolute;left:15px;top:10px;font-size:20px}
+    .filters{position:sticky;top:75px;z-index:15;background:rgba(255,250,244,.94);backdrop-filter:blur(12px);
+      margin:8px -14px 0;padding:10px 14px;border-bottom:1px solid var(--line)}
+    .filter-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+    .filter-row::-webkit-scrollbar{display:none}
+    .chip{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--ink);
+      border-radius:999px;padding:8px 13px;font-size:13px;cursor:pointer;white-space:nowrap}
+    .chip.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .subfilters{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;margin-top:8px}
+    .subfilters::-webkit-scrollbar{display:none}
+    .subchip{flex:0 0 auto;border:0;background:#f4ece6;color:#6e5b50;border-radius:999px;padding:6px 11px;font-size:12px;cursor:pointer}
+    .subchip.active{background:#ead4c8;color:var(--brand2);font-weight:700}
+    .section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px}
+    .count{font-size:12px;color:var(--muted)}
+    .cards{display:grid;gap:12px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;
+      box-shadow:var(--shadow);cursor:pointer;transition:.18s}
+    .card:active{transform:scale(.99)}
+    .card-top{display:flex;gap:10px;align-items:flex-start}
+    .day{min-width:62px;height:62px;border-radius:16px;background:var(--soft);display:grid;place-items:center;
+      color:var(--brand2);font-weight:800;font-size:14px;text-align:center}
+    .card h3{margin:0;font-size:17px;line-height:1.35}
+    .card p{margin:5px 0 0;color:var(--muted);font-size:13px}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+    .tag{font-size:11px;background:#f8f2ed;color:#765f52;border-radius:999px;padding:4px 8px}
+    .empty{text-align:center;padding:35px 15px;color:var(--muted)}
+    .reader{position:fixed;inset:0;z-index:50;background:rgba(46,31,24,.38);display:none;align-items:flex-end}
+    .reader.open{display:flex}
+    .sheet{width:100%;max-width:760px;margin:auto;background:#fffaf5;border-radius:26px 26px 0 0;
+      max-height:min(88vh,760px);display:flex;flex-direction:column;overflow:hidden;
+      box-shadow:0 -15px 45px rgba(30,20,15,.2)}
+    .sheet-head{padding:13px 15px 10px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center}
+    .sheet-head .day{min-width:48px;width:48px;height:48px;font-size:12px}
+    .sheet-title{flex:1}.sheet-title h2{font-size:18px;line-height:1.35;margin:0}.sheet-title small{color:var(--muted)}
+    .close{border:0;background:#f1e8e1;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:20px}
+    .dialogue{overflow-y:auto;overscroll-behavior:contain;padding:16px 16px 10px;min-height:0}
+    .line{background:#fff;border:1px solid var(--line);border-radius:16px;padding:11px 13px;margin:0 0 9px}
+    .speaker{font-weight:800;color:var(--brand2);font-size:12px;margin-bottom:3px}
+    .text{font-size:15px;white-space:pre-wrap}
+    .sheet-foot{padding:10px 14px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);
+      display:flex;gap:8px;background:#fffaf5}
+    .foot-btn{flex:1;border:1px solid var(--line);background:#fff;border-radius:13px;padding:10px;cursor:pointer;color:var(--ink)}
+    .foot-btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+    .status{font-size:11px;color:var(--muted);text-align:center;margin-top:14px}
+    @media(min-width:650px){.cards{grid-template-columns:1fr 1fr}.sheet{border-radius:26px;margin-bottom:20px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo">🌼</div>
+      <div>
+        <h1>दैनिक गर्भ सुसंवाद</h1>
+        <p>प्रेम • संस्कार • प्रार्थना</p>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>बाळाशी प्रेमाने संवाद साधूया</h2>
+    <p>आई, बाबा किंवा दोघांसाठी संवाद निवडा. विषय, संस्कार आणि विचारांनुसार सहज शोधा.</p>
+    <div class="search"><span>⌕</span><input id="search" type="search" placeholder="संवाद, विषय किंवा संस्कार शोधा…"></div>
+  </section>
+
+  <nav class="filters" aria-label="संवाद फिल्टर">
+    <div class="filter-row" id="speakerFilters"></div>
+    <div class="subfilters" id="categoryFilters"></div>
+  </nav>
+
+  <div class="section-head">
+    <strong id="heading">आजचा संवाद</strong><span class="count" id="count"></span>
+  </div>
+  <main class="cards" id="cards"></main>
+  <div class="status">डेटा स्वतंत्र JSON फाइल्समधून लोड होतो — GitHub वर content बदलण्यासाठी index.html बदलण्याची गरज नाही.</div>
+</div>
+
+<div class="reader" id="reader" role="dialog" aria-modal="true">
+  <section class="sheet">
+    <div class="sheet-head">
+      <div class="day" id="rDay"></div>
+      <div class="sheet-title"><h2 id="rTitle"></h2><small id="rMeta"></small></div>
+      <button class="close" id="close" aria-label="बंद करा">×</button>
+    </div>
+    <div class="dialogue" id="dialogue"></div>
+    <div class="sheet-foot">
+      <button class="foot-btn" id="prev">← मागील</button>
+      <button class="foot-btn primary" id="next">पुढील →</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATA_FILES = {
+  mother: 'data/mother.json',
+  father: 'data/father.json',
+  parents: 'data/parents dialogue.json',
+  momstories: 'data/momstories.json',
+  dadstories: 'data/Dadstories.json',
+  thoughts: 'data/thoughts.json',
+  personality: 'data/Great personality.json',
+  categories: 'data/categories.json'
+};
+
+const fallback = [
+  {id:'m1',day:1,title:'कुटुंबातील आनंद आणि बाळाचे स्वागत',speaker:'mother',category:'कुटुंब',tags:['प्रेम','सुरक्षितता'],lines:[
+    ['आई','माझ्या लाडक्या बाळा, आई तुझ्याशी प्रेमाने बोलायला आली आहे.'],
+    ['आई','तू आमच्या आयुष्यात येणार आहेस या विचाराने माझे मन आनंदाने भरून गेले आहे.'],
+    ['आई','आपल्या घरात प्रेम, शांतता आणि आनंदाचे वातावरण सदैव राहो.'],
+    ['आई','तू सुरक्षित आहेस आणि तुला माझे प्रेम नेहमी जाणवत राहो.'],
+    ['आई','तुझ्या प्रत्येक दिवसात चांगुलपणा, करुणा आणि आनंद वाढत जावो.'],
+    ['आई','तू मोठा झाल्यावर इतरांशी प्रेमाने आणि आदराने वाग.'],
+    ['आई','तुझ्या मनात शिकण्याची आणि चांगले करण्याची इच्छा सदैव राहो.'],
+    ['आई','आपण दोघे मिळून खूप सुंदर आठवणी निर्माण करूया.'],
+    ['आई','तुझ्यासाठी माझी मनापासून प्रार्थना आणि शुभेच्छा आहेत.'],
+    ['आई','माझ्या बाळा, तू आनंदी आणि शांत राहा; आईचे तुझ्यावर खूप प्रेम आहे.']
+  ]},
+  {id:'p1',day:1,title:'आई-बाबांचा संयुक्त प्रेमसंवाद',speaker:'parents',category:'कुटुंब',tags:['प्रेम','आशीर्वाद'],lines:[
+    ['आई-बाबा','माझ्या लाडक्या बाळा, आज आम्ही दोघेही तुझ्याशी मनापासून गप्पा मारायला आलो आहोत.'],
+    ['आई','आईचा हा कोमल हात आणि बाबांचा हा आधार तुला प्रेमाची ऊब देत आहे.'],
+    ['बाबा','तू आमच्या आयुष्यात येणार आहेस या विचाराने आमचे घर आनंदाने भरले आहे.'],
+    ['आई','आपल्या घरात हसरे, प्रसन्न आणि सकारात्मक वातावरण ठेवण्याचा आम्ही प्रयत्न करतो.'],
+    ['बाबा','तू आमच्या प्रेमाचे सुंदर प्रतीक आहेस.'],
+    ['आई','तुझ्या मनात शांतता आणि चांगुलपणाची बीजे रुजत राहोत.'],
+    ['बाबा','तुला प्रत्येक दिवस नवीन काही शिकण्याची प्रेरणा मिळो.'],
+    ['आई','आपण प्रेम, संस्कार आणि कृतज्ञता यांना आपल्या जीवनाचा भाग बनवूया.'],
+    ['बाबा','तुझ्या प्रत्येक पावलावर आमच्या शुभेच्छा आणि आशीर्वाद आहेत.'],
+    ['आई-बाबा','बाळा, आनंदी राहा; आम्ही तुझी प्रेमाने वाट पाहत आहोत.']
+  ]},
+  {id:'f1',day:1,title:'बाबांचा धीर आणि विश्वास',speaker:'father',category:'आत्मविश्वास',tags:['विश्वास','धैर्य'],lines:[
+    ['बाबा','माझ्या बाळा, बाबा तुझ्याशी प्रेमाने बोलत आहे.'],
+    ['बाबा','तू आमच्यासाठी खूप खास आहेस आणि तुझ्या येण्याची आम्ही आतुरतेने वाट पाहतो.'],
+    ['बाबा','आयुष्यात प्रश्न आले तर शांतपणे विचार करून मार्ग शोध.'],
+    ['बाबा','चूक झाली तरी त्यातून शिक आणि पुन्हा प्रयत्न कर.'],
+    ['बाबा','इतरांचा आदर कर आणि स्वतःवरही विश्वास ठेव.'],
+    ['बाबा','ज्ञान, प्रामाणिकपणा आणि करुणा हे तुझे खरे मित्र असतील.'],
+    ['बाबा','तुझ्या स्वप्नांना मेहनतीची साथ दे.'],
+    ['बाबा','तू जसा आहेस तसाच मौल्यवान आहेस.'],
+    ['बाबा','तुझ्या प्रत्येक चांगल्या प्रयत्नाचे आम्ही कौतुक करू.'],
+    ['बाबा','माझ्या बाळा, धीराने आणि आनंदाने पुढे जा.']
+  ]}
+];
+
+let items=[], activeSpeaker='all', activeCategory='all', query='', currentIndex=-1;
+
+function normalize(x, fallbackId){
+  const speakerMap={mother:'mother',आई:'mother',mom:'mother',father:'father',बाबा:'father',dad:'father',parents:'parents','आई-बाबा':'parents'};
+  const speaker=speakerMap[x.speaker]||x.type||'mother';
+  let lines=x.lines||x.dialogue||x.content||[];
+  if(typeof lines==='string') lines=lines.split(/\\n+/).filter(Boolean).map(t=>[speaker==='mother'?'आई':speaker==='father'?'बाबा':'आई-बाबा',t]);
+  if(Array.isArray(lines) && lines.length && typeof lines[0]==='string') lines=lines.map(t=>[speaker==='mother'?'आई':speaker==='father'?'बाबा':'आई-बाबा',t]);
+  return {id:x.id||fallbackId,day:Number(x.day||x.dayNumber||x दिवस||0),title:x.title||x.name||'दैनिक गर्भसंवाद',speaker,category:x.category||x.categoryName||'इतर',tags:Array.isArray(x.tags)?x.tags:[],lines};
+}
+
+async function loadFile(path){
+  try{
+    const r=await fetch(path,{cache:'no-cache'});
+    if(!r.ok) throw new Error();
+    const d=await r.json();
+    return Array.isArray(d)?d:(d.items||d.data||[]);
+  }catch(e){return []}
+}
+
+async function loadAll(){
+  const entries=Object.entries(DATA_FILES);
+  const loaded=await Promise.all(entries.map(([key,path])=>loadFile(path)));
+  const all=[];
+  loaded.forEach((arr,i)=>arr.forEach((x,j)=>{
+    const n=normalize(x,`${entries[i][0]}-${j+1}`);
+    if(!n.speaker || n.speaker==='mother' && entries[i][0]==='father') n.speaker=entries[i][0];
+    if(['mother','father','parents'].includes(entries[i][0])) n.speaker=entries[i][0];
+    all.push(n);
+  }));
+  items=all.length?all:fallback;
+  renderFilters();
+  render();
+}
+function speakerLabel(s){return s==='mother'?'आईचे संवाद':s==='father'?'बाबांचे संवाद':s==='parents'?'आई-बाबांचा संवाद':'सर्व संवाद'}
+function matches(x){
+  const hay=(x.title+' '+x.category+' '+x.tags.join(' ')+' '+x.lines.map(a=>a.join(' ')).join(' ')).toLowerCase();
+  return (activeSpeaker==='all'||x.speaker===activeSpeaker) &&
+         (activeCategory==='all'||x.category===activeCategory) &&
+         (!query||hay.includes(query.toLowerCase()));
+}
+function renderFilters(){
+  const sf=[['all','सर्व'],['mother','आईने बोलायचे संवाद'],['father','बाबांनी बोलायचे संवाद'],['parents','आई-बाबांनी एकत्र बोलायचे संवाद']];
+  speakerFilters.innerHTML=sf.map(([v,t])=>`<button class="chip ${activeSpeaker===v?'active':''}" data-s="${v}">${t}</button>`).join('');
+  speakerFilters.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{activeSpeaker=b.dataset.s;renderFilters();render()});
+  const cats=['all',...new Set(items.map(x=>x.category).filter(Boolean))];
+  categoryFilters.innerHTML=cats.map(c=>`<button class="subchip ${activeCategory===c?'active':''}" data-c="${c}">${c==='all'?'सर्व विषय':c}</button>`).join('');
+  categoryFilters.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{activeCategory=b.dataset.c;renderFilters();render()});
+}
+function render(){
+  const arr=items.filter(matches);
+  count.textContent=`${arr.length} संवाद`;
+  heading.textContent=activeSpeaker==='all'?'आजचा संवाद':speakerLabel(activeSpeaker);
+  cards.innerHTML=arr.length?arr.map((x,i)=>`
+    <article class="card" data-id="${x.id}">
+      <div class="card-top"><div class="day">दिवस<br>${x.day||'—'}</div><div>
+        <h3>${esc(x.title)}</h3><p>${speakerLabel(x.speaker)} • ${esc(x.category)}</p></div></div>
+      <div class="tags">${x.tags.slice(0,5).map(t=>`<span class="tag">#${esc(t)}</span>`).join('')}</div>
+    </article>`).join(''):`<div class="empty">या फिल्टरसाठी संवाद सापडला नाही.</div>`;
+  cards.querySelectorAll('.card').forEach(c=>c.onclick=()=>openReader(c.dataset.id));
+}
+function openReader(id){
+  currentIndex=items.filter(matches).findIndex(x=>x.id===id);
+  const arr=items.filter(matches), x=arr[currentIndex]; if(!x)return;
+  rDay.innerHTML=`दिवस<br>${x.day||'—'}`;rTitle.textContent=x.title;rMeta.textContent=`${speakerLabel(x.speaker)} • ${x.category}`;
+  dialogue.innerHTML=x.lines.map(a=>`<div class="line"><div class="speaker">${esc(a[0]||'संवाद')}</div><div class="text">${esc(a[1]||'')}</div></div>`).join('');
+  reader.classList.add('open');document.body.style.overflow='hidden';dialogue.scrollTop=0;
+}
+function move(n){const arr=items.filter(matches);if(!arr.length)return;currentIndex=(currentIndex+n+arr.length)%arr.length;openReader(arr[currentIndex].id)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+search.oninput=e=>{query=e.target.value;render()};
+close.onclick=()=>{reader.classList.remove('open');document.body.style.overflow=''};
+reader.addEventListener('click',e=>{if(e.target===reader)close.click()});
+prev.onclick=()=>move(-1);next.onclick=()=>move(1);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close.click();if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)});
+loadAll();
+</script>
+</body>
+</html>
