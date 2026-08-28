@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d0b12">
+  <meta name="description" content="उमाभरत गर्भसंवाद — प्रेम • संस्कार • प्रार्थना">
+  <title>उमाभरत गर्भसंवाद</title>
+
+  <!-- Google Marathi Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- React 18 & Lucide Icons -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --bg: #0d0b12;
+      --card-bg: rgba(26, 22, 34, 0.96);
+      --card-border: rgba(240, 185, 205, 0.12);
+      --text: #fffbf7;
+      --content: #e8e0dc;
+      --muted: #a69b9e;
+      --accent: #f0a8c8;
+      --accent-gold: #e2ba6f;
+      --primary: #a1547b;
+      --primary-dark: #6e3352;
+      --line: rgba(255, 255, 255, 0.08);
+      --shadow: 0 25px 60px rgba(0, 0, 0, 0.55);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Noto Sans Devanagari", "Nirmala UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 50% -15%, rgba(200, 110, 155, 0.22), transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(130, 80, 120, 0.15), transparent 40%),
+        var(--bg);
+    }
+
+    .app {
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      padding: max(12px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+    }
+
+    .shell {
+      width: min(720px, 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: calc(100dvh - max(24px, env(safe-area-inset-top) + env(safe-area-inset-bottom)));
+    }
+
+    /* TOPBAR */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 2px 4px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #d482a5, #793757);
+      border: 1.5px solid rgba(255, 230, 240, 0.28);
+      box-shadow: 0 4px 15px rgba(212, 130, 165, 0.3);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: #fff9f6;
+      line-height: 1.2;
+    }
+
+    .brand-text p {
+      margin: 2px 0 0;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    /* SLIDING SEGMENTED SWITCH */
+    .switch-container {
+      position: relative;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      width: 175px;
+      height: 36px;
+      user-select: none;
+    }
+
+    .switch-indicator {
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      width: calc(50% - 3px);
+      background: linear-gradient(135deg, #a75c82, #7e3b5e);
+      border-radius: 999px;
+      box-shadow: 0 2px 10px rgba(167, 92, 130, 0.4);
+      transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .switch-indicator.father {
+      transform: translateX(100%);
+      background: linear-gradient(135deg, #745287, #4b325c);
+      box-shadow: 0 2px 10px rgba(116, 82, 135, 0.4);
+    }
+
+    .switch-btn {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      padding: 0;
+      line-height: 30px;
+      transition: color 200ms ease;
+    }
+
+    .switch-btn.active {
+      color: #fff;
+    }
+
+    /* PROGRESS TRACK */
+    .progress-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 4px;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 4px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width 300ms ease;
+    }
+
+    .counter-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 80px;
+      text-align: right;
+    }
+
+    /* CARD CONTAINER */
+    .card {
+      width: 100%;
+      height: min(680px, 68dvh);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    /* STICKY / FIXED CARD HEADER */
+    .card-sticky-head {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 14px 18px 10px;
+      background: rgba(26, 22, 34, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .card-badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+
+    .speaker-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(240, 168, 200, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(240, 168, 200, 0.2);
+    }
+
+    .speaker-tag.father {
+      background: rgba(186, 140, 224, 0.14);
+      color: #ceabee;
+      border-color: rgba(186, 140, 224, 0.25);
+    }
+
+    .day-pill {
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--accent-gold);
+      letter-spacing: 0.03em;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: clamp(1.1rem, 4.2vw, 1.35rem);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    /* SCROLLABLE DIALOGUE BODY */
+    .card-scroll-body {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+
+    .card-scroll-body::-webkit-scrollbar {
+      width: 4px;
+    }
+    .card-scroll-body::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+    }
+
+    .dialogue-item {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: clamp(0.88rem, 3.7vw, 0.98rem);
+      line-height: 1.7;
+      color: var(--content);
+      font-weight: 500;
+    }
+
+    .dialogue-item.highlight {
+      border-left: 3px solid var(--accent);
+      background: rgba(240, 168, 200, 0.04);
+    }
+
+    .card-footer-mantra {
+      margin-top: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+
+    /* BOTTOM NAV BAR */
+    .bottom-nav {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .nav-btn {
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+
+    .nav-btn:active {
+      transform: scale(0.96);
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .nav-btn.primary {
+      background: linear-gradient(135deg, #a75c82, #7e3b5e);
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 16px rgba(167, 92, 130, 0.25);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* WHATSAPP SHARE BUTTON */
+    .share-btn {
+      min-height: 46px;
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.18), rgba(18, 140, 126, 0.28));
+      color: #6ef0a4;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.12);
+      transition: all 150ms ease;
+    }
+
+    .share-btn:active {
+      transform: scale(0.96);
+    }
+
+    .share-btn:hover {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.26), rgba(18, 140, 126, 0.38));
+      border-color: rgba(37, 211, 102, 0.5);
+    }
+
+    .share-btn svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2.2;
+    }
+
+    .swipe-hint {
+      text-align: center;
+      font-size: 0.65rem;
+      color: #797177;
+      margin-top: -3px;
+    }
+
+    /* TOAST MESSAGE */
+    .toast {
+      position: fixed;
+      bottom: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1c1824;
+      color: #fff;
+      border: 1px solid var(--accent);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      z-index: 100;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      animation: fadeInOut 2.5s ease forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translate(-50%, 10px); }
+      15% { opacity: 1; transform: translate(-50%, 0); }
+      85% { opacity: 1; transform: translate(-50%, 0); }
+      100% { opacity: 0; transform: translate(-50%, -10px); }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    const { useState, useEffect, useRef } = React;
+
+    // Embedded Fallback Data for Mother & Father (1-30 days each)
+    const FALLBACK_MOTHER = [
+      ["दिवस १", "प्रेम आणि सुरक्षिततेची ऊब", "१. माझ्या लाडक्या बाळा, आजपासून मी तुझ्याशी मनापासून एक सुंदर आणि अखंड संवाद सुरू करत आहे.\n२. तू माझ्या उदरात सुरक्षित आहेस आणि माझ्या हृदयाचा प्रत्येक ठोका फक्त तुझ्यासाठी प्रेमाने धडधडत आहे.\n३. माझ्या पोटावरून फिरणारा हा मायेचा हात तुला संपूर्ण जगातील सर्वात सुरक्षित जागा देत आहे.\n४. तू या जगात येण्याआधीच मी आणि तुझे बाबा तुझ्यावर अथांग आणि निरपेक्ष प्रेम करत आहोत.\n५. माझ्या श्वासासोबत वाहणारी प्रत्येक भावना तुझ्या मनाला असीम शांती आणि तृप्ती देणारी ठरो.\n६. तुझ्या आजूबाजूला केवळ सकारात्मक, शुद्ध आणि प्रेमळ स्पंदनांचे एक अभेद्य कवच निर्माण झाले आहे.\n७. स्वतःवर प्रेम करण्याचे आणि जगाला भरभरून प्रेम देण्याचे उत्तम संस्कार तुझ्या अंतर्मनात रुजत आहेत.\n८. कोणत्याही भीतीशिवाय आणि संकोचाशिवाय तू माझ्या कुशीत अगदी निर्धास्तपणे आणि सुखाने वाढत राहा.\n९. तुझे अस्तित्व हे आमच्या संपूर्ण घराचे चैतन्य, आनंद आणि प्रकाशाचा अखंड झरा आहे.\n१०. बाळा, शांतपणे झोप आणि माझ्या प्रेमाची ऊब अनुभवत अतिशय आनंदाने आणि उत्साहाने घडत राहा."],
+      ["दिवस २", "आरोग्य, तेज आणि सुदृढ शरीर", "१. माझ्या गोड बाळा, तुझ्या शरीराची प्रत्येक पेशी, ऊती आणि अवयव अतिशय परिपूर्णतेने विकसित होत आहेत.\n२. मी घेत असलेल्या प्रत्येक पोषक अन्नाचा आणि पाण्याचा अंश तुला प्रचंड शारीरिक ताकद आणि तेज देत आहे.\n३. तुझी रोगप्रतिकारशक्ती जन्मतःच अत्यंत बलवान, कणखर आणि सर्व रोगांपासून तुझे रक्षण करणारी घडत आहे.\n४. तुझा मेंदू, हृदय, डोळे आणि सर्व ज्ञानेंद्रिये अतिशय प्रमाणबद्ध, निरोगी आणि कार्यक्षम होत आहेत.\n५. तुझ्या चेहऱ्यावर एक अलौकिक ईश्वरी तेज, डोळ्यांमध्ये निर्मळ चमक आणि ओठांवर गोड हास्य फुलत आहे.\n६. निसर्गाची सर्व पंचमहाभूते तुझ्या शरीराला सुदृढता, चपळता आणि अखंड ऊर्जा प्रदान करत आहेत.\n७. तुझे फुफ्फुस, हाडे आणि स्नायू प्रत्येक क्षणाला अधिक मजबूत आणि शक्तिशाली बनत चालले आहेत.\n८. माझ्या शरीरातील सकारात्मक हार्मोन्स तुझ्या वाढीला एक नैसर्गिक आणि निरोगी दिशा देत आहेत.\n९. तू जेव्हा या जगात येशील, तेव्हा तू एक अत्यंत देखणे, सशक्त, सुदृढ आणि निरोगी बालक म्हणून ओळखले जाशील.\n१०. बाळा, पूर्ण शक्तीने आणि आरोग्याच्या परिपूर्ण आशीर्वादाने तू माझ्या उदरात सुरक्षितपणे बहरत राहा."]
+    ];
+
+    const FALLBACK_FATHER = [
+      ["दिवस १", "पितृप्रेम, ओळख आणि सुरक्षिततेचे वचन", "१. माझ्या लाडक्या बाळा, मी तुझा बाबा तुझ्याशी बोलतोय; माझा हा आश्वासक आवाज तुझ्या अंतर्मनात शांततेने उतरू दे.\n२. तुझ्या आईच्या उदरात तू सुरक्षित आहेस आणि बाहेरून मी तुझ्या संरक्षणासाठी एक अभेद्य ढाल बनून उभा आहे.\n३. तू या जगात येण्याआधीच माझे संपूर्ण आयुष्य तुझ्या प्रेमाने, आनंदाने आणि नव्या स्वप्नांनी भरून गेले आहे.\n४. माझ्या हाताचा स्पर्श जेव्हा तुझ्या आईच्या पोटावर होतो, तेव्हा मला तुझ्या अस्तित्वाची आणि नात्याची सुंदर अनुभूती येते.\n५. तू मुलगा असो वा मुलगी, तू माझ्यासाठी या विश्वातील सर्वात अनमोल आणि सुंदर भेट आहेस.\n६. जीवनाच्या प्रत्येक वळणावर, प्रत्येक सुख-दुःखात तुझा हा बाबा तुझ्या पाठीशी खंबीरपणे आणि विश्वासाने उभा राहील.\n७. तुला जगातल्या सर्व संकटांपासून दूर ठेवून सर्वोत्तम जीवन देण्याचा मी आज तुला अंतःकरणापासून शब्द देतो.\n८. माझ्या प्रत्येक श्वासात तुझ्या उज्ज्वल भविष्याची आणि तुझ्या सुदृढ आरोग्याची मंगलमय प्रार्थना आहे.\n९. कोणत्याही भीतीशिवाय अगदी शांतपणे आणि सुखाने तू आईच्या कुशीत वाढत राहा.\n१०. बाळा, शांत झोप; तुझा बाबा तुझ्या आगमनाची अतिशय आतुरतेने आणि अभिमानाने वाट पाहत आहे."],
+      ["दिवस २", "अलौकिक बुद्धिमत्ता आणि तर्कशुद्ध विचार", "१. माझ्या कुशाग्र बाळा, तुझ्या मेंदूला आणि विचारशक्तीला या विश्वातील सर्वात तल्लख आणि अलौकिक बुद्धिमत्ता लाभत आहे.\n२. प्रत्येक गोष्टीमागील वैज्ञानिक कारण समजून घेण्याची आणि सत्य शोधण्याची तीव्र जिज्ञासा तुझ्या मनात निर्माण होवो.\n३. गुंतागुंतीच्या समस्यांवर शांत डोक्याने विचार करून अचूक, सोपे आणि योग्य मार्ग शोधण्याची कला तुला साध्य होईल.\n४. केवळ ऐकीव गोष्टींवर विश्वास न ठेवता, तर्कशुद्ध विचार आणि पुराव्यांच्या आधारे निष्कर्ष काढण्याची क्षमता तुझ्यात रुजेल.\n५. पुस्तकी ज्ञानासोबतच व्यावहारिक चातुर्य, समयसूचकता आणि व्यवहारज्ञान तुझ्या व्यक्तिमत्त्वाला परिपूर्ण बनवेल.\n६. विज्ञानाची ओढ, गणिताची अचूकता आणि तंत्रज्ञानाची उत्तम समज तुझ्या बुद्धीला सदैव प्रगत आणि धारदार ठेवेल.\n७. निर्णय घेताना भावना आणि बुद्धीचा परिपूर्ण समतोल साधून तू अत्यंत विवेकी व योग्य निर्णय घेशील.\n८. नवीन कल्पना शोधून काढणे आणि नवनिर्मिती करणे हा तुझ्या दैनंदिन विचारांचा मुख्य भाग बनेल.\n९. तुझी ही कुशाग्र बुद्धिमत्ता तुला जगातील कोणत्याही मोठ्या व्यासपीठावर सन्मान आणि यश मिळवून देईल.\n१०. बाळा, ज्ञानाचा अथांग महासागर हो आणि तुझ्या बुद्धिमत्तेने हे जग अधिक सुंदर आणि प्रगत कर."]
+    ];
+
+    function App() {
+      const [speaker, setSpeaker] = useState('mother'); // 'mother' or 'father'
+      const [motherData, setMotherData] = useState(FALLBACK_MOTHER);
+      const [fatherData, setFatherData] = useState(FALLBACK_FATHER);
+      const [currentIndex, setCurrentIndex] = useState(0);
+      const [toastMsg, setToastMsg] = useState('');
+      const [isSharing, setIsSharing] = useState(false);
+
+      const touchStartX = useRef(0);
+      const touchEndX = useRef(0);
+
+      // Load external JSON files (mothers.json / fathers.json)
+      useEffect(() => {
+        // Fetch Mother's Data
+        fetch('./data/mothers.json')
+          .then(res => res.ok ? res.json() : fetch('./data/mother.json').then(r => r.json()))
+          .then(d => { if (Array.isArray(d) && d.length > 0) setMotherData(d); })
+          .catch(() => console.log('Mother data using fallback/cached'));
+
+        // Fetch Father's Data
+        fetch('./data/fathers.json')
+          .then(res => res.ok ? res.json() : fetch('./data/father.json').then(r => r.json()))
+          .then(d => { if (Array.isArray(d) && d.length > 0) setFatherData(d); })
+          .catch(() => console.log('Father data using fallback/cached'));
+      }, []);
+
+      const activeList = speaker === 'mother' ? motherData : fatherData;
+      const totalDays = activeList.length;
+
+      // Ensure index is within range
+      const safeIndex = Math.min(currentIndex, totalDays - 1);
+      const currentItem = activeList[safeIndex] || ["दिवस १", "संवाद", "माहिती उपलब्ध नाही."];
+      const [dayLabel, titleText, rawContent] = currentItem;
+
+      // Parse lines
+      const lines = typeof rawContent === 'string'
+        ? rawContent.split('\n').filter(l => l.trim().length > 0)
+        : (Array.isArray(rawContent) ? rawContent : [rawContent]);
+
+      const progressPercent = ((safeIndex + 1) / totalDays) * 100;
+
+      const handleSpeakerChange = (newSpeaker) => {
+        setSpeaker(newSpeaker);
+        setCurrentIndex(0); // Reset to Day 1 on filter switch
+      };
+
+      const goToPrev = () => {
+        if (safeIndex > 0) setCurrentIndex(safeIndex - 1);
+      };
+
+      const goToNext = () => {
+        if (safeIndex < totalDays - 1) setCurrentIndex(safeIndex + 1);
+      };
+
+      // Keyboard arrow navigation
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (e.key === 'ArrowLeft') goToPrev();
+          if (e.key === 'ArrowRight') goToNext();
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [safeIndex, totalDays]);
+
+      // Touch swipe
+      const handleTouchStart = (e) => { touchStartX.current = e.targetTouches[0].clientX; };
+      const handleTouchMove = (e) => { touchEndX.current = e.targetTouches[0].clientX; };
+      const handleTouchEnd = () => {
+        const diff = touchStartX.current - touchEndX.current;
+        if (diff > 50) goToNext();
+        else if (diff < -50) goToPrev();
+      };
+
+      const showToast = (msg) => {
+        setToastMsg(msg);
+        setTimeout(() => setToastMsg(''), 2600);
+      };
+
+      // Generate Card Image & Share via WhatsApp / Native Share
+      const handleShare = async () => {
+        if (isSharing) return;
+        setIsSharing(true);
+        showToast('इमेज तयार होत आहे...');
+
+        try {
+          // Setup High-Res Canvas
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          const width = 1080;
+          const padding = 70;
+          const contentWidth = width - padding * 2;
+
+          // Measure lines to calculate canvas height dynamically
+          ctx.font = '500 32px "Noto Sans Devanagari", sans-serif';
+          let calculatedHeight = 520; // Top header + brand + spacing
+          
+          const wrappedLines = [];
+          lines.forEach((line) => {
+            const words = line.split(' ');
+            let currentLine = '';
+            words.forEach((word) => {
+              const testLine = currentLine ? `${currentLine} ${word}` : word;
+              const testWidth = ctx.measureText(testLine).width;
+              if (testWidth > contentWidth) {
+                wrappedLines.push(currentLine);
+                currentLine = word;
+              } else {
+                currentLine = testLine;
+              }
+            });
+            if (currentLine) wrappedLines.push(currentLine);
+            wrappedLines.push(''); // Gap between lines
+          });
+
+          calculatedHeight += wrappedLines.length * 44 + 200; // Footer space
+          canvas.width = width;
+          canvas.height = Math.max(1400, calculatedHeight);
+
+          // Draw Luxury Gradient Background
+          const bgGrad = ctx.createLinearGradient(0, 0, width, canvas.height);
+          bgGrad.addColorStop(0, '#15101c');
+          bgGrad.addColorStop(0.5, '#1e1628');
+          bgGrad.addColorStop(1, '#0e0b14');
+          ctx.fillStyle = bgGrad;
+          ctx.fillRect(0, 0, width, canvas.height);
+
+          // Border & Glow
+          ctx.strokeStyle = 'rgba(240, 168, 200, 0.25)';
+          ctx.lineWidth = 4;
+          ctx.strokeRect(25, 25, width - 50, canvas.height - 50);
+
+          // Brand Header
+          ctx.fillStyle = '#f0a8c8';
+          ctx.font = '800 36px "Noto Sans Devanagari", sans-serif';
+          ctx.fillText('उमाभरत गर्भसंवाद', padding, 110);
+
+          ctx.fillStyle = '#a69b9e';
+          ctx.font = '600 24px "Noto Sans Devanagari", sans-serif';
+          ctx.fillText('प्रेम • संस्कार • प्रार्थना', padding, 150);
+
+          // Speaker & Day Badge
+          const speakerName = speaker === 'mother' ? 'आईचे संवाद' : 'बाबांचे संवाद';
+          ctx.fillStyle = '#e2ba6f';
+          ctx.font = '800 28px "Noto Sans Devanagari", sans-serif';
+          ctx.fillText(`${dayLabel}  •  ${speakerName}`, padding, 220);
+
+          // Title
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '900 48px "Noto Sans Devanagari", sans-serif';
+          ctx.fillText(titleText, padding, 290);
+
+          // Accent Divider
+          const divGrad = ctx.createLinearGradient(padding, 320, padding + 300, 320);
+          divGrad.addColorStop(0, '#f0a8c8');
+          divGrad.addColorStop(1, 'transparent');
+          ctx.fillStyle = divGrad;
+          ctx.fillRect(padding, 320, 300, 4);
+
+          // Draw Dialogue Lines
+          ctx.fillStyle = '#f1e9e5';
+          ctx.font = '500 32px "Noto Sans Devanagari", sans-serif';
+          let y = 380;
+
+          wrappedLines.forEach((wLine) => {
+            if (wLine === '') {
+              y += 16;
+            } else {
+              ctx.fillText(wLine, padding, y);
+              y += 44;
+            }
+          });
+
+          // Footer Mantra / Blessing
+          ctx.textAlign = 'center';
+          ctx.fillStyle = '#f0a8c8';
+          ctx.font = '700 28px "Noto Sans Devanagari", sans-serif';
+          ctx.fillText('✨ आई-बाबांचे प्रेम आणि शुभ आशीर्वाद ✨', width / 2, canvas.height - 80);
+
+          // Convert canvas to image Blob & File
+          canvas.toBlob(async (blob) => {
+            if (!blob) {
+              setIsSharing(false);
+              return;
+            }
+
+            const fileName = `Garbhasamwad_${dayLabel.replace(/\s+/g, '')}.png`;
+            const file = new File([blob], fileName, { type: 'image/png' });
+            const shareText = `*उमाभरत गर्भसंवाद*\n${dayLabel}: *${titleText}* (${speakerName})\n\n${lines.join('\n')}\n\n✨ आई-बाबांचे प्रेम आणि शुभ आशीर्वाद ✨`;
+
+            // Use Web Share API if supported for direct WhatsApp/App Sharing
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+              try {
+                await navigator.share({
+                  files: [file],
+                  title: 'उमाभरत गर्भसंवाद',
+                  text: shareText
+                });
+                showToast('यशस्वीरित्या शेअर केले!');
+              } catch (err) {
+                if (err.name !== 'AbortError') {
+                  fallbackWhatsApp(shareText);
+                }
+              }
+            } else {
+              // Fallback: WhatsApp direct text + Image download
+              const downloadLink = document.createElement('a');
+              downloadLink.href = URL.createObjectURL(blob);
+              downloadLink.download = fileName;
+              downloadLink.click();
+              fallbackWhatsApp(shareText);
+            }
+            setIsSharing(false);
+          }, 'image/png');
+        } catch (e) {
+          console.error(e);
+          setIsSharing(false);
+          showToast('शेअर करताना त्रुटी आली.');
+        }
+      };
+
+      const fallbackWhatsApp = (text) => {
+        const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+        showToast('WhatsApp वर पाठवत आहे...');
+      };
+
+      return React.createElement('div', { className: 'app' },
+        React.createElement('div', { className: 'shell' },
+
+          // TOPBAR
+          React.createElement('header', { className: 'topbar' },
+            React.createElement('div', { className: 'brand' },
+              React.createElement('div', { className: 'logo-badge' }, 'UB'),
+              React.createElement('div', { className: 'brand-text' },
+                React.createElement('h1', null, 'उमाभरत गर्भसंवाद'),
+                React.createElement('p', null, 'प्रेम • संस्कार • प्रार्थना')
+              )
+            ),
+
+            // SLIDING FILTER TOGGLE BUTTON
+            React.createElement('div', { className: 'switch-container' },
+              React.createElement('div', {
+                className: `switch-indicator ${speaker === 'father' ? 'father' : ''}`
+              }),
+              React.createElement('button', {
+                className: `switch-btn ${speaker === 'mother' ? 'active' : ''}`,
+                onClick: () => handleSpeakerChange('mother')
+              }, 'आईचे संवाद'),
+              React.createElement('button', {
+                className: `switch-btn ${speaker === 'father' ? 'active' : ''}`,
+                onClick: () => handleSpeakerChange('father')
+              }, 'बाबांचे संवाद')
+            )
+          ),
+
+          // PROGRESS TRACK
+          React.createElement('div', { className: 'progress-bar-wrap' },
+            React.createElement('div', { className: 'progress-track' },
+              React.createElement('div', {
+                className: 'progress-fill',
+                style: { width: `${progressPercent}%` }
+              })
+            ),
+            React.createElement('div', { className: 'counter-label' },
+              `दिवस ${safeIndex + 1} / ${totalDays}`
+            )
+          ),
+
+          // MAIN CARD WITH STICKY HEADER
+          React.createElement('main', {
+            className: 'card',
+            onTouchStart: handleTouchStart,
+            onTouchMove: handleTouchMove,
+            onTouchEnd: handleTouchEnd
+          },
+            // FIXED / STICKY HEADER
+            React.createElement('div', { className: 'card-sticky-head' },
+              React.createElement('div', { className: 'card-badge-row' },
+                React.createElement('span', {
+                  className: `speaker-tag ${speaker === 'father' ? 'father' : ''}`
+                }, speaker === 'mother' ? '🌸 आईचा संवाद' : '🌟 बाबांचा संवाद'),
+                React.createElement('span', { className: 'day-pill' }, dayLabel)
+              ),
+              React.createElement('h2', { className: 'card-title' }, titleText)
+            ),
+
+            // SCROLLABLE BODY
+            React.createElement('div', { className: 'card-scroll-body' },
+              lines.map((ln, idx) =>
+                React.createElement('div', {
+                  key: idx,
+                  className: `dialogue-item ${idx === 0 || idx === lines.length - 1 ? 'highlight' : ''}`
+                }, ln)
+              ),
+              React.createElement('div', { className: 'card-footer-mantra' },
+                '✨ आई-बाबांचे प्रेम आणि शुभ आशीर्वाद ✨'
+              )
+            )
+          ),
+
+          // BOTTOM NAV WITH WHATSAPP BUTTON
+          React.createElement('nav', { className: 'bottom-nav' },
+            React.createElement('button', {
+              className: 'nav-btn',
+              onClick: goToPrev,
+              disabled: safeIndex === 0
+            }, '← मागील'),
+
+            React.createElement('button', {
+              className: 'share-btn',
+              onClick: handleShare
+            },
+              React.createElement('i', { 'data-lucide': 'share-2' }),
+              'WhatsApp इमेज'
+            ),
+
+            React.createElement('button', {
+              className: 'nav-btn primary',
+              onClick: goToNext,
+              disabled: safeIndex === totalDays - 1
+            }, 'पुढील →')
+          ),
+
+          // SWIPE HINT
+          React.createElement('div', { className: 'swipe-hint' },
+            'बोटाने सरकवून किंवा एरो की वापरून पुढील दिवस पाहा'
+          )
+        ),
+
+        // TOAST NOTIFICATION
+        toastMsg ? React.createElement('div', { className: 'toast' }, toastMsg) : null
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+    if (window.lucide) window.lucide.createIcons();
+  </script>
+</body>
+</html>
