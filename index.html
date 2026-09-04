@@ -7,7 +7,7 @@
   <meta name="description" content="उमाभरत नित्य गर्भसंवाद">
   <title>उमाभरत नित्य गर्भसंवाद</title>
 
-  <!-- Google Devanagari Fonts -->
+  <!-- Google Devanagari & Mantra Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Serif+Devanagari:wght@300;400;600;700;800&family=Rozha+One&family=Tiro+Devanagari+Marathi:ital@0;1&display=swap" rel="stylesheet">
@@ -31,11 +31,12 @@
       --accent-green: #7ecba1;
       --accent-saffron: #f4a261;
       --accent-teal: #48cae4;
-      --line: rgba(255, 255, 255, 0.07);
+      --line: rgba(255, 255, 255, 0.12);
       --radius: 20px;
 
       --active-accent: var(--accent-rose);
       --active-glow: rgba(240, 168, 200, 0.18);
+      --active-text-dark: #3a1826;
     }
 
     * {
@@ -66,7 +67,7 @@
       min-height: 100dvh;
       display: flex;
       justify-content: center;
-      padding: max(8px, env(safe-area-inset-top)) 12px max(12px, env(safe-area-inset-bottom));
+      padding: max(6px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom));
       touch-action: pan-y;
     }
 
@@ -75,8 +76,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 12px;
-      min-height: calc(100dvh - max(20px, env(safe-area-inset-top) + env(safe-area-inset-bottom)));
+      gap: 6px;
+      min-height: calc(100dvh - max(16px, env(safe-area-inset-top) + env(safe-area-inset-bottom)));
     }
 
     /* TOPBAR */
@@ -84,21 +85,19 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      padding: 3px 2px;
+      gap: 8px;
+      padding: 2px 2px;
     }
 
-    .brand {
+    .brand-horizontal {
       display: flex;
-      flex-direction: row;
       align-items: center;
       gap: 8px;
       min-width: 0;
-      flex: 1;
     }
 
     .dharmachakra-icon {
-      font-size: 1.75rem;
+      font-size: 1.55rem;
       color: var(--active-accent);
       animation: spinClockwise 22s linear infinite;
       display: inline-flex;
@@ -113,7 +112,7 @@
       to { transform: rotate(360deg); }
     }
 
-    .brand-text {
+    .brand-inline-text {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -121,10 +120,10 @@
       min-width: 0;
     }
 
-    .brand-text h1 {
+    .brand-inline-text h1 {
       margin: 0;
       font-family: "Rozha One", serif;
-      font-size: 1.35rem;
+      font-size: 1.18rem;
       font-weight: 400;
       letter-spacing: 0.5px;
       line-height: 1.1;
@@ -133,52 +132,49 @@
       -webkit-text-fill-color: transparent;
     }
 
-    .brand-text h2 {
-      margin: 2px 0 0 0;
-      font-size: 0.78rem;
+    .brand-inline-text h2 {
+      margin: 1px 0 0 0;
+      font-size: 0.72rem;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 0.01em;
-      line-height: 1.2;
+      line-height: 1.1;
     }
 
-    /* HEADER ACTIONS */
     .header-actions {
       display: inline-flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 7px;
+      gap: 6px;
       flex: 0 0 auto;
     }
 
     .header-day-counter {
-      min-width: 65px;
-      text-align: right;
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--active-accent);
-      letter-spacing: 0.02em;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px 9px;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      font-family: "Noto Sans Devanagari", sans-serif;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       white-space: nowrap;
     }
 
     .header-share-btn {
-      width: 31px;
-      height: 31px;
-      min-width: 31px;
-      min-height: 31px;
+      width: 29px;
+      height: 29px;
+      min-width: 29px;
+      min-height: 29px;
       padding: 0;
       border: 1px solid rgba(126, 203, 161, 0.35);
       border-radius: 50%;
-      background: linear-gradient(
-        135deg,
-        rgba(126, 203, 161, 0.15),
-        rgba(30, 80, 55, 0.35)
-      );
+      background: linear-gradient(135deg, rgba(126, 203, 161, 0.15), rgba(30, 80, 55, 0.35));
       color: #88edb5;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       cursor: pointer;
       box-shadow: 0 3px 12px rgba(46, 139, 87, 0.15);
       transition: all 180ms ease;
@@ -188,21 +184,24 @@
       transform: scale(0.91);
     }
 
-    /* TABS */
+    /* COMPACT ROUNDED TABS */
     .tabs-wrapper {
       position: relative;
       width: 100%;
-      margin: 3px 0 6px 0;
+      margin: 1px 0 3px 0;
     }
 
     .tabs-container {
       display: flex;
-      gap: 8px;
+      width: 100%;
+      border-bottom: 1px solid var(--line);
       overflow-x: auto;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 2px;
+      gap: 5px;
+      align-items: flex-end;
+      padding-bottom: 0;
     }
 
     .tabs-container::-webkit-scrollbar {
@@ -210,63 +209,61 @@
     }
 
     .tab-btn {
-      white-space: nowrap;
-      background: rgba(255, 255, 255, 0.04);
+      flex: 1;
+      min-width: max-content;
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--line);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
       color: var(--text-muted);
-      padding: 6px 16px;
-      border-radius: 999px;
-      font-size: 0.8rem;
+      padding: 5px 10px;
+      font-size: 0.78rem;
       font-weight: 600;
-      font-family: "Noto Sans Devanagari", sans-serif;
       cursor: pointer;
-      transition: all 200ms ease;
+      transition: all 180ms ease;
+      font-family: "Noto Sans Devanagari", sans-serif;
       touch-action: manipulation;
+      line-height: 1.15;
+      margin-bottom: 0;
     }
 
+    /* Solid Theme Color Fill for Active Tab with Darkest Variant Text */
     .tab-btn.active {
-      background: linear-gradient(
-        135deg,
-        rgba(255,255,255,0.1),
-        rgba(255,255,255,0.02)
-      );
-      border-color: var(--active-accent);
-      color: #ffffff;
-      box-shadow: 0 2px 10px var(--active-glow);
+      color: var(--active-text-dark);
+      font-weight: 800;
+      background: var(--active-accent);
+      border: 1px solid var(--active-accent);
+      border-bottom: none;
+      box-shadow: 0 -2px 10px var(--active-glow);
     }
 
     /* PROGRESS */
     .progress-bar-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0 4px;
+      width: 100%;
+      padding: 0;
+      margin-top: 1px;
     }
 
     .progress-track {
-      flex: 1;
-      height: 3px;
+      width: 100%;
+      height: 2px;
       border-radius: 99px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
       overflow: hidden;
     }
 
     .progress-fill {
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(
-        90deg,
-        var(--active-accent),
-        #ffffff
-      );
+      background: linear-gradient(90deg, var(--active-accent), #ffffff);
       transition: width 300ms ease, background 300ms ease;
     }
 
-    /* BOOK READER */
+    /* BOOK READER CONTAINER */
     .book-reader {
       width: 100%;
-      height: min(820px, 80dvh);
-      min-height: 470px;
+      height: min(860px, 82dvh);
+      min-height: 480px;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -274,23 +271,18 @@
       border: 1px solid var(--line);
       border-top: 2px solid var(--active-accent);
       border-bottom: 2px solid var(--active-accent);
-      background: linear-gradient(
-        180deg,
-        rgba(23, 18, 30, 0.96) 0%,
-        rgba(16, 12, 22, 0.98) 100%
-      );
-      box-shadow:
-        0 15px 45px rgba(0, 0, 0, 0.6),
-        0 0 25px var(--active-glow);
+      background: linear-gradient(180deg, rgba(23, 18, 30, 0.96) 0%, rgba(16, 12, 22, 0.98) 100%);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 25px var(--active-glow);
       overflow: hidden;
       transition: border-color 300ms ease, box-shadow 300ms ease;
+      margin-bottom: 2px;
     }
 
     .book-header {
       position: sticky;
       top: 0;
       z-index: 10;
-      padding: 10px 18px;
+      padding: 9px 16px;
       background: rgba(23, 18, 30, 0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -304,7 +296,7 @@
     .chapter-title {
       margin: 0;
       font-family: "Noto Serif Devanagari", serif;
-      font-size: clamp(0.96rem, 3.5vw, 1.16rem);
+      font-size: clamp(0.94rem, 3.4vw, 1.15rem);
       font-weight: 700;
       color: #fffdfa;
       line-height: 1.35;
@@ -315,7 +307,7 @@
       flex: 1;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      padding: 18px 20px 24px;
+      padding: 16px 18px 22px;
       scrollbar-width: thin;
       scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
       touch-action: pan-y;
@@ -333,24 +325,25 @@
     .prose-content {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .book-paragraph {
       margin: 0;
       font-family: "Noto Serif Devanagari", serif;
-      font-size: clamp(0.92rem, 3.6vw, 1.02rem);
+      font-size: clamp(0.92rem, 3.5vw, 1.02rem);
       font-weight: 300;
-      line-height: 1.95;
+      line-height: 1.9;
       color: #ede5de;
       text-align: justify;
       text-justify: inter-word;
       letter-spacing: 0.012em;
+      white-space: pre-line;
     }
 
     .book-paragraph:first-of-type::first-letter {
       font-family: "Noto Serif Devanagari", serif;
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 600;
       float: left;
       line-height: 1;
@@ -358,17 +351,69 @@
       color: var(--active-accent);
     }
 
+    /* MANTRA CARD (Left and Right borders removed) */
+    .mantra-verse-card {
+      margin: 14px 0 16px 0;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: none;
+      border-right: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mantra-verse-title {
+      font-family: "Noto Serif Devanagari", serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--active-accent);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+      display: block;
+    }
+
+    .mantra-verse-line {
+      font-family: "Noto Serif Devanagari", serif;
+      font-size: clamp(0.96rem, 3.7vw, 1.08rem);
+      font-weight: 700;
+      line-height: 1.9;
+      color: var(--active-accent);
+      letter-spacing: 0.02em;
+      display: block;
+    }
+
+    .mantra-verse-empty {
+      height: 8px;
+      display: block;
+    }
+
+    .mantra-content-header {
+      margin-top: 18px;
+      margin-bottom: 8px;
+      font-family: "Noto Serif Devanagari", serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--active-accent);
+      display: block;
+      letter-spacing: 0.02em;
+    }
+
     .sanskar-line {
       margin: 4px 0;
-      padding-left: 12px;
+      padding-left: 10px;
       border-left: 2px solid var(--active-accent);
       color: #f8f3eb;
     }
 
     .closing-mantra-box {
-      margin-top: 24px;
-      padding: 14px 18px;
-      border-radius: 14px;
+      margin-top: 20px;
+      padding: 12px 16px;
+      border-radius: 12px;
       background: rgba(255, 255, 255, 0.02);
       border-left: 2px solid var(--active-accent);
       border-right: 2px solid var(--active-accent);
@@ -377,28 +422,29 @@
 
     .closing-text {
       font-family: "Tiro Devanagari Marathi", serif;
-      font-size: 1.02rem;
+      font-size: 0.98rem;
       color: var(--active-accent);
-      line-height: 1.7;
+      line-height: 1.6;
       margin: 0;
       letter-spacing: 0.02em;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
     }
 
     .closing-text i {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
-    /* BOTTOM NAV */
+    /* BOTTOM NAV + FOOTER CONTAINER */
     .bottom-nav {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       width: 100%;
+      padding: 6px 4px 10px 4px;
     }
 
     .nav-btn {
@@ -408,11 +454,7 @@
       min-height: 34px;
       border: 1px solid var(--active-accent);
       border-radius: 50%;
-      background: linear-gradient(
-        135deg,
-        rgba(255,255,255,0.07),
-        rgba(255,255,255,0.02)
-      );
+      background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
       color: #ffffff;
       box-shadow: 0 4px 16px var(--active-glow);
       display: inline-flex;
@@ -444,65 +486,25 @@
     }
 
     .book-dedication-footer {
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       font-size: 0.72rem;
       color: #928a90;
       font-weight: 500;
-      margin-top: -2px;
       letter-spacing: 0.03em;
-      padding-bottom: 2px;
+      line-height: 1.25;
+      padding: 2px 6px;
     }
 
     @media (max-width: 480px) {
-      .shell {
-        gap: 9px;
-      }
-
-      .topbar {
-        gap: 6px;
-      }
-
-      .dharmachakra-icon {
-        font-size: 1.55rem;
-      }
-
-      .brand-text h1 {
-        font-size: 1.2rem;
-      }
-
-      .brand-text h2 {
-        font-size: 0.7rem;
-      }
-
-      .header-day-counter {
-        min-width: 55px;
-        font-size: 0.7rem;
-      }
-
-      .header-share-btn {
-        width: 29px;
-        height: 29px;
-        min-width: 29px;
-        min-height: 29px;
-        font-size: 0.75rem;
-      }
-
-      .tab-btn {
-        padding: 5px 13px;
-        font-size: 0.76rem;
-      }
-
       .book-reader {
-        height: min(780px, 79dvh);
-        min-height: 450px;
+        height: min(840px, 83dvh);
       }
-
-      .book-body {
-        padding: 16px 16px 22px;
-      }
-
-      .book-paragraph {
-        line-height: 1.9;
+      .book-dedication-footer {
+        font-size: 0.68rem;
       }
     }
   </style>
@@ -516,21 +518,15 @@
 
     function cleanNumberedLine(line) {
       if (!line || typeof line !== 'string') return '';
-
       return line
         .trim()
-        .replace(/^[०१२३४५६७८९\d]+[\.\-\)\s]+/u, '')
         .replace(/^(आई-बाबा|आई|बाबा)\s*[:ः\-]\s*/u, '')
         .trim();
     }
 
     function extractParagraphs(rawItem) {
       if (!rawItem) {
-        return {
-          day: "दिवस १",
-          title: "नित्य गर्भसंवाद",
-          paragraphs: []
-        };
+        return { day: "दिवस १", title: "नित्य गर्भसंवाद", paragraphs: [] };
       }
 
       if (!Array.isArray(rawItem) && typeof rawItem === 'object') {
@@ -539,15 +535,9 @@
           : (rawItem.messages || []);
 
         return {
-          day: typeof rawItem.day === 'number'
-            ? `दिवस ${rawItem.day}`
-            : (rawItem.day || "दिवस १"),
-
+          day: typeof rawItem.day === 'number' ? `दिवस ${rawItem.day}` : (rawItem.day || "दिवस १"),
           title: rawItem.title || "नित्य गर्भसंवाद",
-
-          paragraphs: paras
-            .map(p => cleanNumberedLine(p))
-            .filter(Boolean)
+          paragraphs: paras.map(p => cleanNumberedLine(p)).filter(Boolean)
         };
       }
 
@@ -556,29 +546,22 @@
       const rawBody = rawItem[2] || "";
 
       let lines = [];
-
       if (Array.isArray(rawBody)) {
         lines = rawBody;
       } else if (typeof rawBody === 'string') {
         lines = rawBody.split('\n');
       }
 
-      const paragraphs = lines
-        .map(l => cleanNumberedLine(l))
-        .filter(l => l.length > 0);
+      const paragraphs = lines.map(l => cleanNumberedLine(l)).filter(l => l.length > 0);
 
-      return {
-        day,
-        title,
-        paragraphs
-      };
+      return { day, title, paragraphs };
     }
 
     const FALLBACK_DATA = [
       {
         day: "दिवस १",
         title: "माहिती उपलब्ध नाही",
-        paragraphs: ["कृपया इंटरनेट कनेक्शन तपासा."]
+        paragraphs: ["कृपया डेटा फाइल्सचा पाथ किंवा इंटरनेट कनेक्शन तपासा."]
       }
     ];
 
@@ -603,105 +586,50 @@
       const touchStartY = useRef(null);
       const touchStartTime = useRef(0);
 
-      /* THEME */
+      /* DYNAMIC THEME */
       useEffect(() => {
         const root = document.documentElement;
 
         const themes = {
-          mother: {
-            accent: 'var(--accent-rose)',
-            glow: 'rgba(240, 168, 200, 0.18)'
-          },
-
-          father: {
-            accent: 'var(--accent-violet)',
-            glow: 'rgba(186, 140, 224, 0.18)'
-          },
-
-          parent: {
-            accent: 'var(--accent-gold)',
-            glow: 'rgba(226, 186, 111, 0.18)'
-          },
-
-          story: {
-            accent: 'var(--accent-green)',
-            glow: 'rgba(126, 203, 161, 0.18)'
-          },
-
-          mantra: {
-            accent: 'var(--accent-saffron)',
-            glow: 'rgba(244, 162, 97, 0.18)'
-          },
-
-          sanskar: {
-            accent: 'var(--accent-teal)',
-            glow: 'rgba(72, 202, 228, 0.18)'
-          }
+          mother: { accent: 'var(--accent-rose)', glow: 'rgba(240, 168, 200, 0.18)', darkText: '#3a1826' },
+          father: { accent: 'var(--accent-violet)', glow: 'rgba(186, 140, 224, 0.18)', darkText: '#261436' },
+          parent: { accent: 'var(--accent-gold)', glow: 'rgba(226, 186, 111, 0.18)', darkText: '#352504' },
+          story: { accent: 'var(--accent-green)', glow: 'rgba(126, 203, 161, 0.18)', darkText: '#102d1d' },
+          mantra: { accent: 'var(--accent-saffron)', glow: 'rgba(244, 162, 97, 0.18)', darkText: '#381c06' },
+          sanskar: { accent: 'var(--accent-teal)', glow: 'rgba(72, 202, 228, 0.18)', darkText: '#042730' }
         };
 
         const activeTheme = themes[speaker] || themes.mother;
-
-        root.style.setProperty(
-          '--active-accent',
-          activeTheme.accent
-        );
-
-        root.style.setProperty(
-          '--active-glow',
-          activeTheme.glow
-        );
+        root.style.setProperty('--active-accent', activeTheme.accent);
+        root.style.setProperty('--active-glow', activeTheme.glow);
+        root.style.setProperty('--active-text-dark', activeTheme.darkText);
       }, [speaker]);
 
-      /* LOAD ALL 6 JSON FILES */
+      /* LOAD DATA FILES */
       useEffect(() => {
         const loadFiles = async () => {
           const files = [
-            {
-              key: 'mother',
-              path: './data/mothers.json'
-            },
-            {
-              key: 'father',
-              path: './data/fathers.json'
-            },
-            {
-              key: 'parent',
-              path: './data/parent.json'
-            },
-            {
-              key: 'story',
-              path: './data/story.json'
-            },
-            {
-              key: 'mantra',
-              path: './data/mantra.json'
-            },
-            {
-              key: 'sanskar',
-              path: './data/sanskar.json'
-            }
+            { key: 'mother', path: './data/mothers.json' },
+            { key: 'father', path: './data/fathers.json' },
+            { key: 'parent', path: './data/parent.json' },
+            { key: 'story', path: './data/story.json' },
+            { key: 'mantra', path: './data/mantra.json' },
+            { key: 'sanskar', path: './data/sanskar.json' }
           ];
 
-          const newDataMap = {
-            ...dataMap
-          };
+          const newDataMap = { ...dataMap };
 
           for (let file of files) {
             try {
               const res = await fetch(file.path);
-
               if (res.ok) {
                 const data = await res.json();
-
                 if (Array.isArray(data) && data.length > 0) {
                   newDataMap[file.key] = data;
                 }
               }
             } catch (e) {
-              console.log(
-                `Could not load ${file.path}`,
-                e
-              );
+              console.log(`Could not load ${file.path}`, e);
             }
           }
 
@@ -711,49 +639,24 @@
         loadFiles();
       }, []);
 
-      const activeList =
-        dataMap[speaker] || FALLBACK_DATA;
-
+      const activeList = dataMap[speaker] || FALLBACK_DATA;
       const totalDays = activeList.length;
+      const safeIndex = Math.min(currentIndex, Math.max(0, totalDays - 1));
+      const { day, title, paragraphs } = extractParagraphs(activeList[safeIndex]);
 
-      const safeIndex = Math.min(
-        currentIndex,
-        Math.max(0, totalDays - 1)
-      );
+      const progressPercent = totalDays > 0 ? ((safeIndex + 1) / totalDays) * 100 : 0;
 
-      const {
-        day,
-        title,
-        paragraphs
-      } = extractParagraphs(
-        activeList[safeIndex]
-      );
-
-      const progressPercent =
-        totalDays > 0
-          ? ((safeIndex + 1) / totalDays) * 100
-          : 0;
-
-      /* RESET BOOK SCROLL WHEN DAY/TAB CHANGES */
       useEffect(() => {
         if (scrollRef.current) {
           scrollRef.current.scrollTop = 0;
         }
       }, [safeIndex, speaker]);
 
-      /* TAB CHANGE */
-      const handleSpeakerChange = (
-        newSpeaker,
-        event
-      ) => {
+      const handleSpeakerChange = (newSpeaker, event) => {
         setSpeaker(newSpeaker);
         setCurrentIndex(0);
 
-        if (
-          event &&
-          event.target &&
-          tabsContainerRef.current
-        ) {
+        if (event && event.target && tabsContainerRef.current) {
           event.target.scrollIntoView({
             behavior: 'smooth',
             block: 'nearest',
@@ -762,572 +665,408 @@
         }
       };
 
-      /* DAY NAVIGATION */
       const goToPrev = () => {
-        if (safeIndex > 0) {
-          setCurrentIndex(safeIndex - 1);
-        }
+        if (safeIndex > 0) setCurrentIndex(safeIndex - 1);
       };
 
       const goToNext = () => {
-        if (safeIndex < totalDays - 1) {
-          setCurrentIndex(safeIndex + 1);
-        }
+        if (safeIndex < totalDays - 1) setCurrentIndex(safeIndex + 1);
       };
 
-      /* SHARE */
+      /* GENERATE SNAP IMAGE & SHARE VIA NATIVE DIALOG */
       const handleShare = async () => {
-        const shareText =
-          `${title}\n${day}\n\nउमाभरत – नित्य गर्भसंवाद`;
+        let sectionName = 'आईचे संवाद';
+        if (speaker === 'father') sectionName = 'बाबांचे संवाद';
+        if (speaker === 'parent') sectionName = 'पालक (एकत्रित) संवाद';
+        if (speaker === 'story') sectionName = 'गोष्टीरूपी गर्भसंवाद (कथा)';
+        if (speaker === 'mantra') sectionName = 'गर्भसंस्कार मंत्र';
+        if (speaker === 'sanskar') sectionName = 'गर्भसंस्कार विचार';
+
+        const fullContentText = paragraphs.join('\n\n');
+        const shareText = `*उमाभरत नित्य गर्भसंवाद*\n${day} : *${title}* (${sectionName})\n\n${fullContentText}\n\n🙏 प्रिय बाळासाठी, उर्मिला भरत रासवे तर्फे... 🙏`;
 
         try {
-          if (navigator.share) {
-            await navigator.share({
-              title: 'उमाभरत – नित्य गर्भसंवाद',
-              text: shareText
-            });
-          } else if (navigator.clipboard) {
-            await navigator.clipboard.writeText(
-              shareText
-            );
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          const width = 1080;
+          const padding = 70;
+          const contentWidth = width - padding * 2;
 
-            alert('सामग्री कॉपी झाली.');
-          } else {
-            alert(shareText);
-          }
+          ctx.font = '300 32px "Noto Serif Devanagari", serif';
+          let calculatedHeight = 440;
+
+          const wrappedParagraphs = [];
+          paragraphs.forEach((pText) => {
+            const lines = pText.split('\n');
+            lines.forEach((subLine) => {
+              const words = subLine.split(' ');
+              let currentLine = '';
+              const pLines = [];
+              words.forEach((word) => {
+                const testLine = currentLine ? `${currentLine} ${word}` : word;
+                if (ctx.measureText(testLine).width > contentWidth) {
+                  pLines.push(currentLine);
+                  currentLine = word;
+                } else {
+                  currentLine = testLine;
+                }
+              });
+              if (currentLine) pLines.push(currentLine);
+              wrappedParagraphs.push(pLines);
+            });
+          });
+
+          const totalLines = wrappedParagraphs.reduce((acc, p) => acc + p.length, 0);
+          calculatedHeight += totalLines * 52 + wrappedParagraphs.length * 24 + 180;
+          canvas.width = width;
+          canvas.height = Math.max(1350, calculatedHeight);
+
+          const bgGrad = ctx.createLinearGradient(0, 0, width, canvas.height);
+          bgGrad.addColorStop(0, '#16121d');
+          bgGrad.addColorStop(0.5, '#1e1829');
+          bgGrad.addColorStop(1, '#110d18');
+          ctx.fillStyle = bgGrad;
+          ctx.fillRect(0, 0, width, canvas.height);
+
+          ctx.strokeStyle = 'rgba(240, 168, 200, 0.35)';
+          ctx.lineWidth = 3;
+          ctx.strokeRect(30, 30, width - 60, canvas.height - 60);
+
+          ctx.fillStyle = '#f0a8c8';
+          ctx.font = '400 44px "Rozha One", serif';
+          ctx.fillText('उमाभरत नित्य गर्भसंवाद', padding, 115);
+
+          ctx.fillStyle = '#e2ba6f';
+          ctx.font = '600 28px "Noto Sans Devanagari", sans-serif';
+          ctx.fillText(`${day}  •  ${sectionName}`, padding, 175);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '700 42px "Noto Serif Devanagari", serif';
+          ctx.fillText(title, padding, 245);
+
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+          ctx.fillRect(padding, 275, contentWidth, 2);
+
+          let y = 335;
+          ctx.fillStyle = '#ede5de';
+          ctx.font = '300 32px "Noto Serif Devanagari", serif';
+
+          wrappedParagraphs.forEach((pLines) => {
+            pLines.forEach((wLine) => {
+              if (wLine.startsWith('॥') && wLine.endsWith('॥')) {
+                ctx.fillStyle = '#e2ba6f';
+                ctx.font = '700 34px "Noto Serif Devanagari", serif';
+              } else {
+                ctx.fillStyle = '#ede5de';
+                ctx.font = '300 32px "Noto Serif Devanagari", serif';
+              }
+              ctx.fillText(wLine, padding, y);
+              y += 50;
+            });
+            y += 20;
+          });
+
+          ctx.textAlign = 'center';
+          ctx.fillStyle = '#e2ba6f';
+          ctx.font = '400 30px "Tiro Devanagari Marathi", serif';
+          ctx.fillText('🙏 आई-बाबांचे प्रेम आणि शुभ आशीर्वाद 🙏', width / 2, canvas.height - 80);
+
+          canvas.toBlob(async (blob) => {
+            if (!blob) {
+              fallbackShare(shareText);
+              return;
+            }
+            const fileName = `Garbhasamwad_${day.replace(/\s+/g, '')}.png`;
+            const file = new File([blob], fileName, { type: 'image/png' });
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+              try {
+                await navigator.share({
+                  files: [file],
+                  title: 'उमाभरत – नित्य गर्भसंवाद',
+                  text: shareText
+                });
+              } catch (err) {
+                if (err && err.name !== 'AbortError') fallbackShare(shareText);
+              }
+            } else {
+              const downloadLink = document.createElement('a');
+              downloadLink.href = URL.createObjectURL(blob);
+              downloadLink.download = fileName;
+              downloadLink.click();
+              fallbackShare(shareText);
+            }
+          }, 'image/png');
+
         } catch (e) {
-          if (
-            e &&
-            e.name !== 'AbortError'
-          ) {
-            console.log(
-              'Share cancelled/unavailable',
-              e
-            );
-          }
+          fallbackShare(shareText);
         }
       };
 
-      /* SWIPE ANYWHERE */
+      const fallbackShare = (text) => {
+        if (navigator.share) {
+          navigator.share({ title: 'उमाभरत – नित्य गर्भसंवाद', text: text }).catch(() => {});
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(text);
+          alert('संपूर्ण मजकूर कॉपी झाला आहे. आपण व्हॉट्सॲपवर पेस्ट करू शकता.');
+        } else {
+          window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
+        }
+      };
+
+      /* SWIPE GESTURES */
       useEffect(() => {
         const onTouchStart = (e) => {
-          if (
-            !e.touches ||
-            e.touches.length !== 1
-          ) {
-            return;
-          }
-
-          touchStartX.current =
-            e.touches[0].clientX;
-
-          touchStartY.current =
-            e.touches[0].clientY;
-
-          touchStartTime.current =
-            Date.now();
+          if (!e.touches || e.touches.length !== 1) return;
+          touchStartX.current = e.touches[0].clientX;
+          touchStartY.current = e.touches[0].clientY;
+          touchStartTime.current = Date.now();
         };
 
         const onTouchEnd = (e) => {
-          if (
-            touchStartX.current === null ||
-            !e.changedTouches ||
-            e.changedTouches.length !== 1
-          ) {
-            return;
-          }
-
-          const endX =
-            e.changedTouches[0].clientX;
-
-          const endY =
-            e.changedTouches[0].clientY;
-
-          const dx =
-            endX - touchStartX.current;
-
-          const dy =
-            endY - touchStartY.current;
-
-          const elapsed =
-            Date.now() -
-            touchStartTime.current;
+          if (touchStartX.current === null || !e.changedTouches || e.changedTouches.length !== 1) return;
+          const endX = e.changedTouches[0].clientX;
+          const endY = e.changedTouches[0].clientY;
+          const dx = endX - touchStartX.current;
+          const dy = endY - touchStartY.current;
+          const elapsed = Date.now() - touchStartTime.current;
 
           touchStartX.current = null;
           touchStartY.current = null;
 
-          /*
-           * Only a clear horizontal gesture
-           * becomes day navigation.
-           *
-           * This prevents normal vertical
-           * reading/scrolling from changing days.
-           */
-          if (
-            elapsed > 900 ||
-            Math.abs(dx) < 55 ||
-            Math.abs(dx) <
-              Math.abs(dy) * 1.35
-          ) {
-            return;
-          }
-
-          if (dx < 0) {
-            goToNext();
-          } else {
-            goToPrev();
-          }
+          if (elapsed > 900 || Math.abs(dx) < 55 || Math.abs(dx) < Math.abs(dy) * 1.35) return;
+          if (dx < 0) goToNext(); else goToPrev();
         };
 
-        document.addEventListener(
-          'touchstart',
-          onTouchStart,
-          { passive: true }
-        );
-
-        document.addEventListener(
-          'touchend',
-          onTouchEnd,
-          { passive: true }
-        );
+        document.addEventListener('touchstart', onTouchStart, { passive: true });
+        document.addEventListener('touchend', onTouchEnd, { passive: true });
 
         return () => {
-          document.removeEventListener(
-            'touchstart',
-            onTouchStart
-          );
-
-          document.removeEventListener(
-            'touchend',
-            onTouchEnd
-          );
+          document.removeEventListener('touchstart', onTouchStart);
+          document.removeEventListener('touchend', onTouchEnd);
         };
       }, [safeIndex, totalDays]);
 
       const TABS = [
-        {
-          id: 'mother',
-          label: 'आई'
-        },
-        {
-          id: 'father',
-          label: 'बाबा'
-        },
-        {
-          id: 'parent',
-          label: 'पालक'
-        },
-        {
-          id: 'story',
-          label: 'कथा'
-        },
-        {
-          id: 'mantra',
-          label: 'मंत्र'
-        },
-        {
-          id: 'sanskar',
-          label: 'संस्कार'
-        }
+        { id: 'mother', label: 'आई' },
+        { id: 'father', label: 'बाबा' },
+        { id: 'parent', label: 'पालक' },
+        { id: 'story', label: 'कथा' },
+        { id: 'mantra', label: 'मंत्र' },
+        { id: 'sanskar', label: 'संस्कार' }
       ];
+
+      /* MANTRA RENDERER */
+      const renderContent = () => {
+        if (speaker !== 'mantra') {
+          return paragraphs.map((p, idx) => {
+            const trimmed = p.trim();
+            if (speaker === 'sanskar' && (trimmed.includes('विचार:') || trimmed.includes('कृती:'))) {
+              return React.createElement('p', { key: idx, className: 'book-paragraph sanskar-line' }, trimmed);
+            }
+            return React.createElement('p', { key: idx, className: 'book-paragraph' }, p);
+          });
+        }
+
+        const elements = [];
+        let i = 0;
+        while (i < paragraphs.length) {
+          const trimmed = paragraphs[i].trim();
+
+          const isHeader = trimmed.startsWith('॥') && trimmed.endsWith('॥') && !trimmed.includes('\n');
+          const isVerseHeader = isHeader && !trimmed.includes('अर्थ') && !trimmed.includes('गर्भसंवाद') && !trimmed.includes('हितगुज');
+
+          // Mantra Card Case: Header followed by shloka verse (without left & right borders)
+          if (isVerseHeader && i + 1 < paragraphs.length && (paragraphs[i + 1].includes('।') || paragraphs[i + 1].includes('॥') || paragraphs[i + 1].trim().startsWith('ॐ'))) {
+            const cardHeader = trimmed;
+            const cardVerseLines = paragraphs[i + 1].split('\n');
+            elements.push(
+              React.createElement('div', { key: `mantra-card-${i}`, className: 'mantra-verse-card' },
+                React.createElement('span', { className: 'mantra-verse-title' }, cardHeader),
+                cardVerseLines.map((line, lIdx) => {
+                  const lTrim = line.trim();
+                  if (!lTrim) return React.createElement('span', { key: lIdx, className: 'mantra-verse-empty' });
+                  return React.createElement('span', { key: lIdx, className: 'mantra-verse-line' }, lTrim);
+                })
+              )
+            );
+            i += 2;
+            continue;
+          } else if (!isHeader && (trimmed.includes('।') || trimmed.includes('॥') || trimmed.startsWith('ॐ'))) {
+            const cardVerseLines = paragraphs[i].split('\n');
+            elements.push(
+              React.createElement('div', { key: `mantra-card-${i}`, className: 'mantra-verse-card' },
+                cardVerseLines.map((line, lIdx) => {
+                  const lTrim = line.trim();
+                  if (!lTrim) return React.createElement('span', { key: lIdx, className: 'mantra-verse-empty' });
+                  return React.createElement('span', { key: lIdx, className: 'mantra-verse-line' }, lTrim);
+                })
+              )
+            );
+            i++;
+            continue;
+          }
+
+          if (isHeader) {
+            elements.push(
+              React.createElement('h3', { key: `header-${i}`, className: 'mantra-content-header' }, trimmed)
+            );
+            i++;
+            continue;
+          }
+
+          elements.push(
+            React.createElement('p', { key: `para-${i}`, className: 'book-paragraph' }, paragraphs[i])
+          );
+          i++;
+        }
+
+        return elements;
+      };
 
       return React.createElement(
         'div',
-        {
-          className: 'app'
-        },
-
+        { className: 'app' },
         React.createElement(
           'div',
-          {
-            className: 'shell'
-          },
+          { className: 'shell' },
 
-          /* HEADER */
+          /* TOPBAR */
           React.createElement(
             'header',
-            {
-              className: 'topbar'
-            },
-
+            { className: 'topbar' },
             React.createElement(
               'div',
-              {
-                className: 'brand'
-              },
-
-              React.createElement(
-                'i',
-                {
-                  className:
-                    'fa-solid fa-dharmachakra dharmachakra-icon'
-                }
-              ),
-
+              { className: 'brand-horizontal' },
+              React.createElement('i', { className: 'fa-solid fa-dharmachakra dharmachakra-icon' }),
               React.createElement(
                 'div',
-                {
-                  className: 'brand-text'
-                },
-
-                React.createElement(
-                  'h1',
-                  null,
-                  'उमाभरत'
-                ),
-
-                React.createElement(
-                  'h2',
-                  null,
-                  'नित्य गर्भसंवाद'
-                )
+                { className: 'brand-inline-text' },
+                React.createElement('h1', null, 'उमाभरत'),
+                React.createElement('h2', null, 'नित्य गर्भसंवाद')
               )
             ),
-
             React.createElement(
               'div',
-              {
-                className: 'header-actions'
-              },
-
-              React.createElement(
-                'div',
-                {
-                  className:
-                    'header-day-counter'
-                },
-                `${day} / ${totalDays}`
-              ),
-
+              { className: 'header-actions' },
+              React.createElement('div', { className: 'header-day-counter' }, `${day} / ${totalDays}`),
               React.createElement(
                 'button',
                 {
-                  className:
-                    'header-share-btn',
-
-                  onClick:
-                    handleShare,
-
-                  'aria-label':
-                    'शेअर करा',
-
-                  title:
-                    'शेअर करा'
+                  className: 'header-share-btn',
+                  onClick: handleShare,
+                  'aria-label': 'स्नॅप शेअर करा',
+                  title: 'स्नॅप शेअर करा'
                 },
+                React.createElement('i', { className: 'fa-solid fa-share-nodes' })
+              )
+            )
+          ),
 
+          /* COMPACT ROUNDED TABS (SOLID FILL COLOR + DARKEST TEXT) */
+          React.createElement(
+            'div',
+            { className: 'tabs-wrapper' },
+            React.createElement(
+              'div',
+              { className: 'tabs-container', ref: tabsContainerRef },
+              TABS.map(tab =>
                 React.createElement(
-                  'i',
+                  'button',
                   {
-                    className:
-                      'fa-solid fa-share-nodes'
-                  }
+                    key: tab.id,
+                    className: `tab-btn ${speaker === tab.id ? 'active' : ''}`,
+                    onClick: e => handleSpeakerChange(tab.id, e)
+                  },
+                  tab.label
                 )
               )
             )
           ),
 
-          /* TABS */
+          /* PROGRESS BAR */
           React.createElement(
             'div',
-            {
-              className:
-                'tabs-wrapper'
-            },
-
+            { className: 'progress-bar-wrap' },
             React.createElement(
               'div',
-              {
-                className:
-                  'tabs-container',
-
-                ref:
-                  tabsContainerRef
-              },
-
-              TABS.map(
-                tab =>
-                  React.createElement(
-                    'button',
-                    {
-                      key: tab.id,
-
-                      className:
-                        `tab-btn ${
-                          speaker === tab.id
-                            ? 'active'
-                            : ''
-                        }`,
-
-                      onClick: e =>
-                        handleSpeakerChange(
-                          tab.id,
-                          e
-                        )
-                    },
-
-                    tab.label
-                  )
-              )
+              { className: 'progress-track' },
+              React.createElement('div', {
+                className: 'progress-fill',
+                style: { width: `${progressPercent}%` }
+              })
             )
           ),
 
-          /* PROGRESS */
-          React.createElement(
-            'div',
-            {
-              className:
-                'progress-bar-wrap'
-            },
-
-            React.createElement(
-              'div',
-              {
-                className:
-                  'progress-track'
-              },
-
-              React.createElement(
-                'div',
-                {
-                  className:
-                    'progress-fill',
-
-                  style: {
-                    width:
-                      `${progressPercent}%`
-                  }
-                }
-              )
-            )
-          ),
-
-          /* MAIN BOOK */
+          /* MAIN BOOK READER */
           React.createElement(
             'main',
-            {
-              className:
-                'book-reader'
-            },
-
+            { className: 'book-reader' },
             React.createElement(
               'div',
-              {
-                className:
-                  'book-header'
-              },
-
-              React.createElement(
-                'h2',
-                {
-                  className:
-                    'chapter-title'
-                },
-
-                title
-              )
+              { className: 'book-header' },
+              React.createElement('h2', { className: 'chapter-title' }, title)
             ),
-
             React.createElement(
               'div',
-              {
-                className:
-                  'book-body',
-
-                ref:
-                  scrollRef
-              },
-
+              { className: 'book-body', ref: scrollRef },
               React.createElement(
                 'div',
-                {
-                  className:
-                    'prose-content'
-                },
-
-                paragraphs.map(
-                  (p, idx) => {
-
-                    if (
-                      speaker === 'sanskar' &&
-                      (
-                        p.includes('विचार:') ||
-                        p.includes('कृती:')
-                      )
-                    ) {
-                      return React.createElement(
-                        'p',
-                        {
-                          key: idx,
-                          className:
-                            'book-paragraph sanskar-line'
-                        },
-                        p
-                      );
-                    }
-
-                    return React.createElement(
-                      'p',
-                      {
-                        key: idx,
-                        className:
-                          'book-paragraph'
-                      },
-                      p
-                    );
-                  }
-                )
+                { className: 'prose-content' },
+                renderContent()
               ),
 
               React.createElement(
                 'div',
-                {
-                  className:
-                    'closing-mantra-box'
-                },
-
+                { className: 'closing-mantra-box' },
                 React.createElement(
                   'p',
-                  {
-                    className:
-                      'closing-text'
-                  },
-
-                  React.createElement(
-                    'i',
-                    {
-                      className:
-                        'fa-solid fa-praying-hands'
-                    }
-                  ),
-
+                  { className: 'closing-text' },
+                  React.createElement('i', { className: 'fa-solid fa-praying-hands' }),
                   ' आई-बाबांचे प्रेम आणि शुभ आशीर्वाद ',
-
-                  React.createElement(
-                    'i',
-                    {
-                      className:
-                        'fa-solid fa-praying-hands'
-                    }
-                  )
+                  React.createElement('i', { className: 'fa-solid fa-praying-hands' })
                 )
               )
             )
           ),
 
-          /* BOTTOM NAV */
+          /* BOTTOM NAV ALIGNED WITH FOOTER */
           React.createElement(
             'nav',
-            {
-              className:
-                'bottom-nav'
-            },
-
+            { className: 'bottom-nav' },
             React.createElement(
-              'div',
+              'button',
               {
-                style: {
-                  display: 'flex',
-                  justifyContent:
-                    'flex-start'
-                }
+                className: 'nav-btn',
+                onClick: goToPrev,
+                disabled: safeIndex === 0,
+                'aria-label': 'मागील दिवस',
+                title: 'मागील दिवस'
               },
-
-              React.createElement(
-                'button',
-                {
-                  className:
-                    'nav-btn',
-
-                  onClick:
-                    goToPrev,
-
-                  disabled:
-                    safeIndex === 0,
-
-                  'aria-label':
-                    'मागील दिवस',
-
-                  title:
-                    'मागील दिवस'
-                },
-
-                React.createElement(
-                  'i',
-                  {
-                    className:
-                      'fa-solid fa-chevron-left'
-                  }
-                )
-              )
+              React.createElement('i', { className: 'fa-solid fa-chevron-left' })
             ),
-
             React.createElement(
               'div',
-              null
+              { className: 'book-dedication-footer' },
+              'प्रिय बाळासाठी, उर्मिला भरत रासवे तर्फे...'
             ),
-
             React.createElement(
-              'div',
+              'button',
               {
-                style: {
-                  display: 'flex',
-                  justifyContent:
-                    'flex-end'
-                }
+                className: 'nav-btn',
+                onClick: goToNext,
+                disabled: safeIndex === totalDays - 1,
+                'aria-label': 'पुढील दिवस',
+                title: 'पुढील दिवस'
               },
-
-              React.createElement(
-                'button',
-                {
-                  className:
-                    'nav-btn',
-
-                  onClick:
-                    goToNext,
-
-                  disabled:
-                    safeIndex ===
-                    totalDays - 1,
-
-                  'aria-label':
-                    'पुढील दिवस',
-
-                  title:
-                    'पुढील दिवस'
-                },
-
-                React.createElement(
-                  'i',
-                  {
-                    className:
-                      'fa-solid fa-chevron-right'
-                  }
-                )
-              )
+              React.createElement('i', { className: 'fa-solid fa-chevron-right' })
             )
-          ),
-
-          /* FOOTER */
-          React.createElement(
-            'div',
-            {
-              className:
-                'book-dedication-footer'
-            },
-
-            'प्रिय बाळासाठी, उर्मिला भरत रासवे तर्फे...'
           )
         )
       );
     }
 
-    ReactDOM
-      .createRoot(
-        document.getElementById('root')
-      )
-      .render(
-        React.createElement(App)
-      );
+    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
   </script>
 </body>
 </html>
