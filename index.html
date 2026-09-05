@@ -32,7 +32,7 @@
       --accent-saffron: #f4a261;
       --accent-teal: #48cae4;
       --line: rgba(255, 255, 255, 0.12);
-      --radius: 20px;
+      --radius: 18px;
 
       --active-accent: var(--accent-rose);
       --active-glow: rgba(240, 168, 200, 0.18);
@@ -44,6 +44,7 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    /* स्क्रीन पूर्णपणे लॉक - बाहेरून स्क्रोल बंद */
     html, body {
       width: 100%;
       height: 100%;
@@ -52,7 +53,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: "Noto Sans Devanagari", sans-serif;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     body {
@@ -63,30 +64,34 @@
       transition: background 400ms ease;
     }
 
+    /* ॲप कंटेनर १००% स्क्रीनमध्ये लॉक */
     .app {
-      min-height: 100dvh;
+      width: 100%;
+      height: 100dvh;
       display: flex;
       justify-content: center;
-      padding: max(6px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom));
-      touch-action: pan-y;
+      padding: max(6px, env(safe-area-inset-top)) 10px max(3px, env(safe-area-inset-bottom));
+      overflow: hidden;
     }
 
     .shell {
       width: min(720px, 100%);
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 6px;
-      min-height: calc(100dvh - max(16px, env(safe-area-inset-top) + env(safe-area-inset-bottom)));
+      gap: 5px;
+      min-height: 0;
     }
 
-    /* TOPBAR */
+    /* TOPBAR - स्थिर राहील */
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 8px;
       padding: 2px 2px;
+      flex-shrink: 0;
     }
 
     .brand-horizontal {
@@ -97,7 +102,7 @@
     }
 
     .dharmachakra-icon {
-      font-size: 1.55rem;
+      font-size: 1.5rem;
       color: var(--active-accent);
       animation: spinClockwise 22s linear infinite;
       display: inline-flex;
@@ -123,7 +128,7 @@
     .brand-inline-text h1 {
       margin: 0;
       font-family: "Rozha One", serif;
-      font-size: 1.18rem;
+      font-size: 1.15rem;
       font-weight: 400;
       letter-spacing: 0.5px;
       line-height: 1.1;
@@ -188,7 +193,8 @@
     .tabs-wrapper {
       position: relative;
       width: 100%;
-      margin: 1px 0 3px 0;
+      margin: 1px 0 2px 0;
+      flex-shrink: 0;
     }
 
     .tabs-container {
@@ -216,7 +222,7 @@
       border-bottom: none;
       border-radius: 8px 8px 0 0;
       color: var(--text-muted);
-      padding: 5px 10px;
+      padding: 4px 9px;
       font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
@@ -227,7 +233,6 @@
       margin-bottom: 0;
     }
 
-    /* Solid Theme Color Fill for Active Tab with Darkest Variant Text */
     .tab-btn.active {
       color: var(--active-text-dark);
       font-weight: 800;
@@ -237,11 +242,12 @@
       box-shadow: 0 -2px 10px var(--active-glow);
     }
 
-    /* PROGRESS */
+    /* PROGRESS TRACK */
     .progress-bar-wrap {
       width: 100%;
       padding: 0;
       margin-top: 1px;
+      flex-shrink: 0;
     }
 
     .progress-track {
@@ -259,11 +265,11 @@
       transition: width 300ms ease, background 300ms ease;
     }
 
-    /* BOOK READER CONTAINER */
+    /* BOOK READER CONTAINER - शिल्लक राहिलेली सर्व जागा आपोआप घेईल (फ्लेक्स १) */
     .book-reader {
       width: 100%;
-      height: min(860px, 82dvh);
-      min-height: 480px;
+      flex: 1;
+      min-height: 0;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -272,17 +278,16 @@
       border-top: 2px solid var(--active-accent);
       border-bottom: 2px solid var(--active-accent);
       background: linear-gradient(180deg, rgba(23, 18, 30, 0.96) 0%, rgba(16, 12, 22, 0.98) 100%);
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6), 0 0 25px var(--active-glow);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 20px var(--active-glow);
       overflow: hidden;
       transition: border-color 300ms ease, box-shadow 300ms ease;
-      margin-bottom: 2px;
     }
 
     .book-header {
       position: sticky;
       top: 0;
       z-index: 10;
-      padding: 9px 16px;
+      padding: 8px 14px;
       background: rgba(23, 18, 30, 0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -290,24 +295,26 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      flex: 0 0 auto;
+      flex-shrink: 0;
     }
 
     .chapter-title {
       margin: 0;
       font-family: "Noto Serif Devanagari", serif;
-      font-size: clamp(0.94rem, 3.4vw, 1.15rem);
+      font-size: clamp(0.92rem, 3.3vw, 1.12rem);
       font-weight: 700;
       color: #fffdfa;
       line-height: 1.35;
       text-align: left;
     }
 
+    /* केवळ आतला भाग स्क्रोल होईल */
     .book-body {
       flex: 1;
+      min-height: 0;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      padding: 16px 18px 22px;
+      padding: 14px 16px 20px;
       scrollbar-width: thin;
       scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
       touch-action: pan-y;
@@ -331,9 +338,9 @@
     .book-paragraph {
       margin: 0;
       font-family: "Noto Serif Devanagari", serif;
-      font-size: clamp(0.92rem, 3.5vw, 1.02rem);
+      font-size: clamp(0.9rem, 3.5vw, 1.02rem);
       font-weight: 300;
-      line-height: 1.9;
+      line-height: 1.88;
       color: #ede5de;
       text-align: justify;
       text-justify: inter-word;
@@ -351,10 +358,10 @@
       color: var(--active-accent);
     }
 
-    /* MANTRA CARD (Left and Right borders removed) */
+    /* MANTRA CARD (left/right borders removed) */
     .mantra-verse-card {
-      margin: 14px 0 16px 0;
-      padding: 16px 18px;
+      margin: 12px 0 14px 0;
+      padding: 14px 16px;
       border-radius: 14px;
       background: rgba(255, 255, 255, 0.02);
       border-left: none;
@@ -369,7 +376,7 @@
 
     .mantra-verse-title {
       font-family: "Noto Serif Devanagari", serif;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: var(--active-accent);
       margin-bottom: 6px;
@@ -379,7 +386,7 @@
 
     .mantra-verse-line {
       font-family: "Noto Serif Devanagari", serif;
-      font-size: clamp(0.96rem, 3.7vw, 1.08rem);
+      font-size: clamp(0.95rem, 3.6vw, 1.06rem);
       font-weight: 700;
       line-height: 1.9;
       color: var(--active-accent);
@@ -393,10 +400,10 @@
     }
 
     .mantra-content-header {
-      margin-top: 18px;
-      margin-bottom: 8px;
+      margin-top: 16px;
+      margin-bottom: 6px;
       font-family: "Noto Serif Devanagari", serif;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: var(--active-accent);
       display: block;
@@ -411,8 +418,8 @@
     }
 
     .closing-mantra-box {
-      margin-top: 20px;
-      padding: 12px 16px;
+      margin-top: 18px;
+      padding: 10px 14px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.02);
       border-left: 2px solid var(--active-accent);
@@ -422,9 +429,9 @@
 
     .closing-text {
       font-family: "Tiro Devanagari Marathi", serif;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       color: var(--active-accent);
-      line-height: 1.6;
+      line-height: 1.5;
       margin: 0;
       letter-spacing: 0.02em;
       display: inline-flex;
@@ -434,24 +441,25 @@
     }
 
     .closing-text i {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
     }
 
-    /* BOTTOM NAV + FOOTER CONTAINER */
+    /* BOTTOM NAV + FOOTER CONTAINER - २ ते ३ px मोकळी जागा आणि तळाशी स्थिर */
     .bottom-nav {
       display: grid;
       grid-template-columns: auto 1fr auto;
       align-items: center;
       gap: 8px;
       width: 100%;
-      padding: 6px 4px 10px 4px;
+      padding: 4px 4px 2px 4px;
+      flex-shrink: 0;
     }
 
     .nav-btn {
-      width: 34px;
-      height: 34px;
-      min-width: 34px;
-      min-height: 34px;
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      min-height: 32px;
       border: 1px solid var(--active-accent);
       border-radius: 50%;
       background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
@@ -461,7 +469,7 @@
       align-items: center;
       justify-content: center;
       padding: 0;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       cursor: pointer;
       transition: all 180ms ease;
       font-family: "Noto Sans Devanagari", sans-serif;
@@ -486,26 +494,20 @@
     }
 
     .book-dedication-footer {
-      min-height: 34px;
+      min-height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       color: #928a90;
       font-weight: 500;
       letter-spacing: 0.03em;
-      line-height: 1.25;
-      padding: 2px 6px;
-    }
-
-    @media (max-width: 480px) {
-      .book-reader {
-        height: min(840px, 83dvh);
-      }
-      .book-dedication-footer {
-        font-size: 0.68rem;
-      }
+      line-height: 1.2;
+      padding: 0 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   </style>
 </head>
@@ -673,7 +675,7 @@
         if (safeIndex < totalDays - 1) setCurrentIndex(safeIndex + 1);
       };
 
-      /* GENERATE SNAP IMAGE & SHARE VIA NATIVE DIALOG */
+      /* GENERATE SNAP IMAGE & SHARE */
       const handleShare = async () => {
         let sectionName = 'आईचे संवाद';
         if (speaker === 'father') sectionName = 'बाबांचे संवाद';
@@ -856,7 +858,7 @@
         { id: 'sanskar', label: 'संस्कार' }
       ];
 
-      /* MANTRA RENDERER */
+      /* CONTENT RENDERER */
       const renderContent = () => {
         if (speaker !== 'mantra') {
           return paragraphs.map((p, idx) => {
@@ -876,7 +878,6 @@
           const isHeader = trimmed.startsWith('॥') && trimmed.endsWith('॥') && !trimmed.includes('\n');
           const isVerseHeader = isHeader && !trimmed.includes('अर्थ') && !trimmed.includes('गर्भसंवाद') && !trimmed.includes('हितगुज');
 
-          // Mantra Card Case: Header followed by shloka verse (without left & right borders)
           if (isVerseHeader && i + 1 < paragraphs.length && (paragraphs[i + 1].includes('।') || paragraphs[i + 1].includes('॥') || paragraphs[i + 1].trim().startsWith('ॐ'))) {
             const cardHeader = trimmed;
             const cardVerseLines = paragraphs[i + 1].split('\n');
@@ -963,7 +964,7 @@
             )
           ),
 
-          /* COMPACT ROUNDED TABS (SOLID FILL COLOR + DARKEST TEXT) */
+          /* COMPACT ROUNDED TABS */
           React.createElement(
             'div',
             { className: 'tabs-wrapper' },
@@ -1030,7 +1031,7 @@
             )
           ),
 
-          /* BOTTOM NAV ALIGNED WITH FOOTER */
+          /* BOTTOM NAV + FOOTER CONTAINER */
           React.createElement(
             'nav',
             { className: 'bottom-nav' },
