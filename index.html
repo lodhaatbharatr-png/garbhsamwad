@@ -63,13 +63,13 @@
       transition: background 400ms ease;
     }
 
-    /* Outer wrapper locked strictly to viewport without trailing bottom inset padding */
+    /* Fixed 100dvh with breathing room at bottom */
     .app {
       width: 100%;
       height: 100dvh;
       display: flex;
       justify-content: center;
-      padding: max(4px, env(safe-area-inset-top)) 10px 0;
+      padding: max(4px, env(safe-area-inset-top)) 10px max(6px, env(safe-area-inset-bottom));
       overflow: hidden;
     }
 
@@ -264,7 +264,7 @@
       transition: width 300ms ease, background 300ms ease;
     }
 
-    /* BODY CONTAINER: Takes all available remaining height automatically */
+    /* BOOK READER CONTAINER */
     .book-reader {
       width: 100%;
       flex: 1;
@@ -282,11 +282,12 @@
       transition: border-color 300ms ease, box-shadow 300ms ease;
     }
 
+    /* BALANCED EQUAL TOP & BOTTOM PADDING FOR TITLE */
     .book-header {
       position: sticky;
       top: 0;
       z-index: 10;
-      padding: 8px 14px;
+      padding: 10px 16px;
       background: rgba(23, 18, 30, 0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -299,11 +300,12 @@
 
     .chapter-title {
       margin: 0;
+      padding: 0;
       font-family: "Noto Serif Devanagari", serif;
       font-size: clamp(0.92rem, 3.3vw, 1.12rem);
       font-weight: 700;
       color: #fffdfa;
-      line-height: 1.35;
+      line-height: 1.25;
       text-align: left;
     }
 
@@ -441,14 +443,14 @@
       font-size: 0.88rem;
     }
 
-    /* BOTTOM NAV + FOOTER: Tight zero-bottom margin & no extra padding */
+    /* BALANCED EQUAL TOP & BOTTOM PADDING FOR FOOTER */
     .bottom-nav {
       display: grid;
       grid-template-columns: auto 1fr auto;
       align-items: center;
       gap: 8px;
       width: 100%;
-      padding: 2px 4px 0 4px;
+      padding: 6px 4px 6px 4px;
       margin-bottom: 0;
       flex-shrink: 0;
     }
@@ -962,7 +964,7 @@
             )
           ),
 
-          /* COMPACT TABS */
+          /* COMPACT ROUNDED TABS */
           React.createElement(
             'div',
             { className: 'tabs-wrapper' },
@@ -997,7 +999,7 @@
             )
           ),
 
-          /* MAIN BOOK READER (Auto filling viewport height) */
+          /* MAIN BOOK READER */
           React.createElement(
             'main',
             { className: 'book-reader' },
@@ -1029,7 +1031,7 @@
             )
           ),
 
-          /* BOTTOM NAV (Aligned & tight with viewport edge) */
+          /* BOTTOM NAV + FOOTER CONTAINER */
           React.createElement(
             'nav',
             { className: 'bottom-nav' },
