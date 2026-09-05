@@ -44,7 +44,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* स्क्रीन पूर्णपणे लॉक - बाहेरून स्क्रोल बंद */
     html, body {
       width: 100%;
       height: 100%;
@@ -64,13 +63,13 @@
       transition: background 400ms ease;
     }
 
-    /* ॲप कंटेनर १००% स्क्रीनमध्ये लॉक */
+    /* Outer wrapper locked strictly to viewport without trailing bottom inset padding */
     .app {
       width: 100%;
       height: 100dvh;
       display: flex;
       justify-content: center;
-      padding: max(6px, env(safe-area-inset-top)) 10px max(3px, env(safe-area-inset-bottom));
+      padding: max(4px, env(safe-area-inset-top)) 10px 0;
       overflow: hidden;
     }
 
@@ -80,11 +79,11 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 5px;
+      gap: 4px;
       min-height: 0;
     }
 
-    /* TOPBAR - स्थिर राहील */
+    /* TOPBAR */
     .topbar {
       display: flex;
       align-items: center;
@@ -189,7 +188,7 @@
       transform: scale(0.91);
     }
 
-    /* COMPACT ROUNDED TABS */
+    /* COMPACT TABS */
     .tabs-wrapper {
       position: relative;
       width: 100%;
@@ -242,7 +241,7 @@
       box-shadow: 0 -2px 10px var(--active-glow);
     }
 
-    /* PROGRESS TRACK */
+    /* PROGRESS */
     .progress-bar-wrap {
       width: 100%;
       padding: 0;
@@ -265,7 +264,7 @@
       transition: width 300ms ease, background 300ms ease;
     }
 
-    /* BOOK READER CONTAINER - शिल्लक राहिलेली सर्व जागा आपोआप घेईल (फ्लेक्स १) */
+    /* BODY CONTAINER: Takes all available remaining height automatically */
     .book-reader {
       width: 100%;
       flex: 1;
@@ -308,7 +307,6 @@
       text-align: left;
     }
 
-    /* केवळ आतला भाग स्क्रोल होईल */
     .book-body {
       flex: 1;
       min-height: 0;
@@ -358,7 +356,6 @@
       color: var(--active-accent);
     }
 
-    /* MANTRA CARD (left/right borders removed) */
     .mantra-verse-card {
       margin: 12px 0 14px 0;
       padding: 14px 16px;
@@ -444,14 +441,15 @@
       font-size: 0.88rem;
     }
 
-    /* BOTTOM NAV + FOOTER CONTAINER - २ ते ३ px मोकळी जागा आणि तळाशी स्थिर */
+    /* BOTTOM NAV + FOOTER: Tight zero-bottom margin & no extra padding */
     .bottom-nav {
       display: grid;
       grid-template-columns: auto 1fr auto;
       align-items: center;
       gap: 8px;
       width: 100%;
-      padding: 4px 4px 2px 4px;
+      padding: 2px 4px 0 4px;
+      margin-bottom: 0;
       flex-shrink: 0;
     }
 
@@ -858,7 +856,7 @@
         { id: 'sanskar', label: 'संस्कार' }
       ];
 
-      /* CONTENT RENDERER */
+      /* MANTRA RENDERER */
       const renderContent = () => {
         if (speaker !== 'mantra') {
           return paragraphs.map((p, idx) => {
@@ -964,7 +962,7 @@
             )
           ),
 
-          /* COMPACT ROUNDED TABS */
+          /* COMPACT TABS */
           React.createElement(
             'div',
             { className: 'tabs-wrapper' },
@@ -999,7 +997,7 @@
             )
           ),
 
-          /* MAIN BOOK READER */
+          /* MAIN BOOK READER (Auto filling viewport height) */
           React.createElement(
             'main',
             { className: 'book-reader' },
@@ -1031,7 +1029,7 @@
             )
           ),
 
-          /* BOTTOM NAV + FOOTER CONTAINER */
+          /* BOTTOM NAV (Aligned & tight with viewport edge) */
           React.createElement(
             'nav',
             { className: 'bottom-nav' },
